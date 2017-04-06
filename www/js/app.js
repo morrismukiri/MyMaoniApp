@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services','ngMockE2E'])
 
 .run(function($ionicPlatform , $rootScope, $timeout) {
   $ionicPlatform.ready(function() {
@@ -26,8 +26,8 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
 	  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
 		  $rootScope.authStatus = toState.authStatus;
 		  if($rootScope.authStatus){
-			  
-			
+
+
 		  }
     });
 
@@ -38,7 +38,7 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
 			$timeout(function(){
 				angular.element(document.querySelector('#leftMenu' )).removeClass("hide");
 			},1000);
-		}	
+		}
 	});
 
 })
