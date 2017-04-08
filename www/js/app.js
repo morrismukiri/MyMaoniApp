@@ -123,7 +123,7 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
     }
 
     if (!AuthService.isAuthenticated()) {
-      if (next.name !== 'app.login') {
+      if ((next.name !== 'app.login' )&& (next.name !== 'app.signup' )) {
         event.preventDefault();
         $state.go('app.login');
       }
