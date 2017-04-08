@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location, $ionicPopup) {
+.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location, $ionicPopup, $state, AuthService, AUTH_EVENTS) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -13,22 +13,38 @@ angular.module('starter.controllers', [])
   $scope.loginData = {};
 
   //--------------------------------------------
-   $scope.login = function(user) {
-			
-		if(typeof(user)=='undefined'){
-			$scope.showAlert('Please fill username and password to proceed.');	
-			return false;
-		}
+  //  $scope.login = function(user) {
 
-		if(user.username=='demo@gmail.com' && user.password=='demo'){
-			$location.path('/app/dashboard');
-		}else{
-			$scope.showAlert('Invalid username or password.');	
-		}
-		
-	};
+	// 	if(typeof(user)=='undefined'){
+	// 		$scope.showAlert('Please fill username and password to proceed.');
+	// 		return false;
+	// 	}
+
+	// 	if(user.username=='demo@gmail.com' && user.password=='demo'){
+	// 		$location.path('/app/dashboard');
+	// 	}else{
+	// 		$scope.showAlert('Invalid username or password.');
+	// 	}
+
+	// };
+    $scope.data = {};
+
+    $scope.login = function(data) {
+      AuthService.login(data.username, data.password).then(function(authenticated) {
+        $state.go('app.dashboard', {}, {reload: true});
+        $scope.setCurrentUsername(data.username);
+      }, function(err) {
+        var alertPopup = $ionicPopup.alert({
+          title: 'Login failed!',
+          template: 'Please check your credentials!'
+        });
+      });
+    };
   //--------------------------------------------
-  $scope.logout = function() {   $location.path('/app/login');   };
+  $scope.logout = function() {
+    AuthService.logout();
+     $state.go('app.login');
+   };
   //--------------------------------------------
    // An alert dialog
 	 $scope.showAlert = function(msg) {
@@ -38,6 +54,27 @@ angular.module('starter.controllers', [])
 	   });
 	 };
   //--------------------------------------------
+  $scope.username = AuthService.username();
+
+  $scope.$on(AUTH_EVENTS.notAuthorized, function(event) {
+    var alertPopup = $ionicPopup.alert({
+      title: 'Unauthorized!',
+      template: 'You are not allowed to access this resource.'
+    });
+  });
+
+  $scope.$on(AUTH_EVENTS.notAuthenticated, function(event) {
+    AuthService.logout();
+    $state.go('login');
+    var alertPopup = $ionicPopup.alert({
+      title: 'Session Lost!',
+      template: 'Sorry, You have to login again.'
+    });
+  });
+
+  $scope.setCurrentUsername = function(name) {
+    $scope.username = name;
+  };
 })
 
 .controller('ProfilesCtrl', function($scope , Profiles) {
