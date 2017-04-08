@@ -1,10 +1,16 @@
 {
-  "name": "HelloIonic",
+  "name": "MyMaoni",
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.1.0"
   },
   "dependencies": {
-    "angular-mocks": "~1.6.4"
+    "ionic-material": "~0.4.2",
+    "robotodraft": "~1.1.0"
+  },
+  "resolutions": {
+    "angular": "1.4.3",
+    "angular-sanitize": "1.4.3",
+    "ionic": "1.1.0"
   }
 }
