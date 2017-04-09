@@ -71,46 +71,45 @@ angular.module('starter.routes', [])
           }
         }
       })
-      // if none of the above states are matched, use this as the fallback
 
 
-    //   .state('tabsController.home', {
-    //     url: '/home',
-    //     views: {
-    //       'tab1': {
-    //         templateUrl: 'templates/home.html',
-    //         controller: 'homeCtrl'
-    //       }
-    //     }
-    //   })
+      .state('tabsController.home', {
+        url: '/home',
+        views: {
+          'tab1': {
+            templateUrl: 'templates/home.html',
+            controller: 'homeCtrl'
+          }
+        }
+      })
 
-    //   .state('tabsController.polls', {
-    //     url: '/polls',
-    //     views: {
-    //       'tab2': {
-    //         templateUrl: 'templates/polls.html',
-    //         controller: 'pollsCtrl'
-    //       }
-    //     }
-    //   })
+      .state('tabsController.polls', {
+        url: '/polls',
+        views: {
+          'tab2': {
+            templateUrl: 'templates/polls.html',
+            controller: 'pollsCtrl'
+          }
+        }
+      })
 
-    //   .state('tabsController.communityDiscussion', {
-    //     url: '/talk',
-    //     views: {
-    //       'tab3': {
-    //         templateUrl: 'templates/communityDiscussion.html',
-    //         controller: 'communityDiscussionCtrl'
-    //       }
-    //     }
-    //   })
+      .state('tabsController.communityDiscussion', {
+        url: '/talk',
+        views: {
+          'tab3': {
+            templateUrl: 'templates/communityDiscussion.html',
+            controller: 'communityDiscussionCtrl'
+          }
+        }
+      })
 
-    //   .state('tabsController', {
-    //     url: '/page1',
-    //     templateUrl: 'templates/tabsController.html',
-    //     abstract: true
-    //   })
+      .state('tabsController', {
+        url: '/tabs',
+        templateUrl: 'templates/tabsController.html',
+        abstract: true
+      })
 
-    // // $urlRouterProvider.otherwise('/page1/home')
+    // $urlRouterProvider.otherwise('/page1/home')
     $urlRouterProvider.otherwise('/app/login');
 
 
