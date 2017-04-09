@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-  .controller('AppCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $location, $ionicPopup, $state, AuthService, AUTH_EVENTS, $stateParams, ionicMaterialInk, ionicMaterialMotion) {
+  .controller('AppCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $location, $ionicPopup, $state, AuthService, AUTH_EVENTS, $stateParams, ionicMaterialInk, ionicMaterialMotion, API, $http) {
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -14,10 +14,10 @@ angular.module('starter.controllers', [])
 
     //--------------------------------------------
     $scope.data = {};
-
+    console.log("api", API);
     $scope.login = function (data) {
       AuthService.login(data.username, data.password).then(function (authenticated) {
-        $state.go('app.dashboard', {}, { reload: true });
+        $state.go('tabsController.home', {}, { reload: true });
         $scope.setCurrentUsername(data.username);
       }, function (err) {
         var alertPopup = $ionicPopup.alert({
@@ -25,8 +25,8 @@ angular.module('starter.controllers', [])
           template: 'Please check your credentials!'
         });
         // to activate ink on modal
-        $timeout(function() {
-            ionic.material.ink.displayEffect();
+        $timeout(function () {
+          ionicMaterialInk.displayEffect();
         }, 0);
       });
     };
@@ -43,9 +43,9 @@ angular.module('starter.controllers', [])
         template: msg
       });
       // to activate ink on modal
-        $timeout(function() {
-            ionic.material.ink.displayEffect();
-        }, 0);
+      $timeout(function () {
+        ionic.material.ink.displayEffect();
+      }, 0);
     };
     //--------------------------------------------
     $scope.username = AuthService.username();
@@ -58,8 +58,10 @@ angular.module('starter.controllers', [])
     });
 
     $scope.$on(AUTH_EVENTS.notAuthenticated, function (event) {
+       if($state.is('app.login')) return;
       AuthService.logout();
-      $state.go('login');
+      $state.go('app.login');
+
       var alertPopup = $ionicPopup.alert({
         title: 'Session Lost!',
         template: 'Sorry, You have to login again.'
@@ -110,17 +112,32 @@ angular.module('starter.controllers', [])
   })
 
 
-  .controller('menuCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+  .controller('menuCtrl', ['$scope', '$stateParams', '$state', 'AuthService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, $stateParams) {
-
+    function ($scope, $stateParams, $state, AuthService) {
+      //--------------------------------------------
+      $scope.logout = function () {
+        AuthService.logout();
+        $state.go('app.login');
+      };
 
     }])
 
-  .controller('homeCtrl', ['$scope', '$stateParams','Profiles',
-    function ($scope, $stateParams,Profiles) {
-       $scope.profiles = Profiles.all();
+  .controller('homeCtrl', ['$scope', '$stateParams', 'Profiles', 'API', '$http', 'AuthService',
+    function ($scope, $stateParams, Profiles, API, $http, AuthService) {
+      $scope.profiles = Profiles.all();
+      $http.get(API.root + "user/details").then(
+        function (result) {
+          $scope.polls = result.data;
+
+          console.log($scope.polls);
+        },
+        function (response) {
+          console.log(response);
+        }
+      )
+
     }])
 
   .controller('pollsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller

@@ -43,7 +43,7 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services','
 
 })
 
-.run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
+.run(function ($rootScope, $state, AuthService, AUTH_EVENTS,$http) {
   $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
 
     if ('data' in next && 'authorizedRoles' in next.data) {
