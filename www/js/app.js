@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services', 'ionic-material'])
+angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services','starter.routes', 'ionic-material'])
 
 .run(function($ionicPlatform , $rootScope, $timeout) {
   $ionicPlatform.ready(function() {
@@ -43,75 +43,6 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services', 
 
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
-
-    .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
-  })
-
-//--------------------------------------
-
- .state('app.login', {
-    url: '/login',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/login.html'
-        // templateUrl: 'templates/tab-signin.html'
-      }
-    },
-	authStatus: false
-  })
- .state('app.signup', {
-    url: '/signup',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/tab-signup.html',
-      }
-   },
-	authStatus: false
-  })
-//--------------------------------------
-
-
-  .state('app.dashboard', {
-    url: '/dashboard',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/dashboard.html',
-		controller: 'DashCtrl'
-      }
-     },
-	 authStatus: true
-  })
-
-
-    .state('app.profiles', {
-      url: '/profiles',
-      views: {
-        'menuContent': {
-          // templateUrl: 'templates/profiles.html',
-          templateUrl: 'templates/profile.html',
-          controller: 'ProfilesCtrl'
-        }
-      }
-    })
-
-  .state('app.profile', {
-    url: '/profile/:profileId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/profile-detail.html',
-        controller: 'ProfileCtrl'
-      }
-    }
-  });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/login');
-})
 .run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
   $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
 
@@ -133,6 +64,60 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services', 
   });
 })
 
+/*
+  This directive is used to disable the "drag to open" functionality of the Side-Menu
+  when you are dragging a Slider component.
+*/
+.directive('disableSideMenuDrag', ['$ionicSideMenuDelegate', '$rootScope', function($ionicSideMenuDelegate, $rootScope) {
+    return {
+        restrict: "A",
+        controller: ['$scope', '$element', '$attrs', function ($scope, $element, $attrs) {
+
+            function stopDrag(){
+              $ionicSideMenuDelegate.canDragContent(false);
+            }
+
+            function allowDrag(){
+              $ionicSideMenuDelegate.canDragContent(true);
+            }
+
+            $rootScope.$on('$ionicSlides.slideChangeEnd', allowDrag);
+            $element.on('touchstart', stopDrag);
+            $element.on('touchend', allowDrag);
+            $element.on('mousedown', stopDrag);
+            $element.on('mouseup', allowDrag);
+
+        }]
+    };
+}])
+
+/*
+  This directive is used to open regular and dynamic href links inside of inappbrowser.
+*/
+.directive('hrefInappbrowser', function() {
+  return {
+    restrict: 'A',
+    replace: false,
+    transclude: false,
+    link: function(scope, element, attrs) {
+      var href = attrs['hrefInappbrowser'];
+
+      attrs.$observe('hrefInappbrowser', function(val){
+        href = val;
+      });
+
+      element.bind('click', function (event) {
+
+        window.open(href, '_system', 'location=yes');
+
+        event.preventDefault();
+        event.stopPropagation();
+
+      });
+    }
+  };
+})
+
 .factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
   return {
     responseError: function (response) {
@@ -145,6 +130,7 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services', 
   };
 })
 
+
 .config(function ($httpProvider) {
   $httpProvider.interceptors.push('AuthInterceptor');
-});;
+});
