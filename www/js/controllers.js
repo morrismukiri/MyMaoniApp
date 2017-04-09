@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location, $ionicPopup, $state, AuthService, AUTH_EVENTS) {
+.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location, $ionicPopup, $state, AuthService, AUTH_EVENTS, $stateParams, ionicMaterialInk,ionicMaterialMotion) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -81,11 +81,37 @@ angular.module('starter.controllers', [])
     $scope.profiles = Profiles.all();
 })
 
-.controller('ProfileCtrl', function($scope, $stateParams , Profiles) {
+// .controller('ProfileCtrl', function($scope, $stateParams , Profiles) {
+// 	$scope.profile = Profiles.get($stateParams.profileId);
+// })
+.controller('ProfileCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Profiles) {
+    // Set Header
+
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
 	$scope.profile = Profiles.get($stateParams.profileId);
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
 })
 
-.controller('DashCtrl', function($scope, $stateParams , Profiles) {
+
+.controller('DashCtrl', function($scope, $stateParams , Profiles,ionicMaterialInk) {
 	$scope.profiles = Profiles.all();
 });
 

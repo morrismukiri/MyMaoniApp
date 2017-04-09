@@ -59,7 +59,8 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services', 
     url: '/login',
     views: {
       'menuContent': {
-        templateUrl: 'templates/tab-signin.html'
+        templateUrl: 'templates/login.html'
+        // templateUrl: 'templates/tab-signin.html'
       }
     },
 	authStatus: false
@@ -92,7 +93,8 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services', 
       url: '/profiles',
       views: {
         'menuContent': {
-          templateUrl: 'templates/profiles.html',
+          // templateUrl: 'templates/profiles.html',
+          templateUrl: 'templates/profile.html',
           controller: 'ProfilesCtrl'
         }
       }

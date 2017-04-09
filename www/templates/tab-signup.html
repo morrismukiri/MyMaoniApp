@@ -10,13 +10,25 @@
 
   <div class="row responsive-sm padding remvoeBP">
 	  <div class="col">
-		   <div class="app-logo"><img src="img/logo.png"></div>
-			
+		   <!--<div class="app-logo"><img src="img/logo.png"></div>-->
+
 			<div class="list list-inset removePM">
-			  <label class="item item-input"><input type="text" placeholder="Full Name"> </label>
-			  <label class="item item-input"><input type="text" placeholder="Email Address"> </label>
-			  <label class="item item-input"><input type="text" placeholder="Phone Number"> </label>
-			  <label class="item item-input"><input type="password" placeholder="Password"> </label>
+			  <label class="item item-input  item-floating-label">
+          <span class="input-label">Full Name</span>
+          <input type="text" placeholder="Full Name">
+        </label>
+			  <label class="item item-input  item-floating-label">
+          <span class="input-label">Email Address</span>
+          <input type="email" placeholder="Email Address">
+        </label>
+			  <label class="item item-input  item-floating-label">
+          <span class="input-label">Phone Number</span>
+          <input type="tel" placeholder="Phone Number" ng-pattern="/(0|\+?254)7([0-3|7])(\d){7}/i">
+        </label>
+			  <label class="item item-input  item-floating-label">
+          <span class="input-label">Password</span>
+          <input type="password" placeholder="Password">
+        </label>
 			</div>
 
 			<div class="loginButton"><button class="button ion-person button-block button-balanced"> Register </button>  </div>
