@@ -110,7 +110,7 @@ angular.module('starter.routes', [])
       })
 
     // $urlRouterProvider.otherwise('/page1/home')
-    $urlRouterProvider.otherwise('/app/login');
+    $urlRouterProvider.otherwise('/tabs/home');
 
 
   });
