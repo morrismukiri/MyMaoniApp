@@ -143,19 +143,26 @@ angular.module('starter.services', [])
       role: function () { return role; }
     };
   })
-  .filter("userNames", function ($q, $http, USER_ROLES, API) {
-    function fetch(input) {
-      var name = "";
-      $http.get(API.root + 'userdetail/' + input)
-        .then(function (result) {
-          console.log('user detail for ', input, ' retrieved successfully', result.data.data.name);
-          name = result.data.data.name;
-          // return name;
-        }, function (result) {
-          console.log('Fetching userdetail failed', result);
-        })
-        return name;
+  .filter("userDetails", function ($q, $http, USER_ROLES, API) {
+    var cached = {};
+    function fetch(id, field) {
+      name = "Mg";
+      if (id) {
+        if (id in cached) {
+          // avoid returning a promise!
+          return typeof cached[id].then !== 'function' ? cached[id][field] : undefined;
+        } else {
+          cached[id] = $http.get(API.root + 'userdetail/' + id)
+            .then(function (result) {
+              console.log('user detail for ', id, ' retrieved successfully', result.data.data.name);
+              cached[id] = result.data.data;
+            }, function (result) {
+              console.log('Fetching userdetail failed', result);
+            })
+        }
+      }
+
     }
-    // fetch.$stateful = true;
+    fetch.$stateful = true;
     return fetch;
   });
