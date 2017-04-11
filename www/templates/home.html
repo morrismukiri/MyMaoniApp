@@ -1,30 +1,40 @@
 <ion-view title="Home" id="page2">
   <ion-content padding="true" class=" manual-remove-top-padding has-header">
-    <div class="list card stable-bg">
-      <div class="item">
-        <img src="img/arya.jpg">
-        <h2>Arya Stark</h2>
-        <p>"Joffrey. Cersei. Ilyn Payne. Hound. Polliver. The Mountain."</p>
+    <ion-list>
+      <div class="list card stable-bg" ng-repeat="poll in polls">
+        <div class="item">
+          <!--<img src="img/arya.jpg">-->
+          <h2>{{poll.title}}</h2>
+          <p>Posted by {{poll.userId | userNames}} <span am-time-ago="poll.created_at"></span></p>
+        </div>
+        <div class="item item-body">
+          {{poll.description}}
+          <p>
+            <a class="subdued">1 vote</a>
+            <a class="subdued">5 Comments</a>
+          </p>
+        </div>
+        <div class="item tabs tabs-default tabs-icon-left">
+          <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"><i class="icon ion-thumbsup"></i> vote </a>
+          <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"> <i class="icon ion-chatbox"></i> Comment </a>
+          <!--<a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"> <i class="icon ion-share"></i> Share </a>-->
+        </div>
       </div>
-      <div class="item item-body">
-        The quickest way to a man's heart is through Arya's needle. She has two speeds: Walk and Kill, and is the reason why Waldo
-        is still hiding.
-        <p>
-          <a class="subdued">1 Like</a>
-          <a class="subdued">5 Comments</a>
-        </p>
-      </div>
-      <div class="item tabs tabs-secondary tabs-icon-left">
-        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"><i class="icon ion-thumbsup"></i> Like </a>
-        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"> <i class="icon ion-chatbox"></i> Comment </a>
-        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"> <i class="icon ion-share"></i> Share </a>
-      </div>
-    </div>
+    </ion-list>
     <ion-list>
       <div class="card list " ng-repeat="profilelist in profiles">
         <div class="item item-divider">{{profilelist.name}}</div>
         <div class="item item-text-wrap">{{profilelist.deseg}}</div>
       </div>
     </ion-list>
+
+
+    <a ui-sref="">
+      <button class="button button-balanced button-fab button-fab button-fab-bottom-right " >
+         <i class="icon ion-plus"></i>
+     </button>
+    </a>
+
+
   </ion-content>
 </ion-view>
