@@ -72,14 +72,6 @@ angular.module('starter.controllers', [])
       $scope.username = name;
     };
   })
-
-  .controller('ProfilesCtrl', function ($scope, Profiles) {
-    $scope.profiles = Profiles.all();
-  })
-
-  // .controller('ProfileCtrl', function($scope, $stateParams , Profiles) {
-  // 	$scope.profile = Profiles.get($stateParams.profileId);
-  // })
   .controller('ProfileCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Profiles) {
     // Set Header
 
@@ -107,9 +99,9 @@ angular.module('starter.controllers', [])
   })
 
 
-  .controller('DashCtrl', function ($scope, $stateParams, Profiles, ionicMaterialInk) {
-    $scope.profiles = Profiles.all();
-  })
+  // .controller('DashCtrl', function ($scope, $stateParams, Profiles, ionicMaterialInk) {
+  //   $scope.profiles = Profiles.all();
+  // })
 
 
   .controller('menuCtrl', ['$scope', '$stateParams', '$state', 'AuthService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
@@ -124,9 +116,9 @@ angular.module('starter.controllers', [])
 
     }])
 
-  .controller('homeCtrl', ['$scope', '$stateParams', 'Profiles', 'API', '$http', 'AuthService',
-    function ($scope, $stateParams, Profiles, API, $http, AuthService) {
-      $scope.profiles = Profiles.all();
+  .controller('homeCtrl', ['$scope', '$stateParams',  'API', '$http', 'AuthService',
+    function ($scope, $stateParams, API, $http, AuthService) {
+
       $http.get(API.root + "polls").then(
         function (result) {
           $scope.polls = result.data.data;
