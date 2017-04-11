@@ -154,7 +154,7 @@ angular.module('starter.services', [])
         } else {
           cached[id] = $http.get(API.root + 'userdetail/' + id)
             .then(function (result) {
-              console.log('user detail for ', id, ' retrieved successfully', result.data.data.name);
+              // console.log('user detail for ', id, ' retrieved successfully', result.data.data.name);
               cached[id] = result.data.data;
             }, function (result) {
               console.log('Fetching userdetail failed', result);
