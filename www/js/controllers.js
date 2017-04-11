@@ -127,11 +127,11 @@ angular.module('starter.controllers', [])
   .controller('homeCtrl', ['$scope', '$stateParams', 'Profiles', 'API', '$http', 'AuthService',
     function ($scope, $stateParams, Profiles, API, $http, AuthService) {
       $scope.profiles = Profiles.all();
-      $http.get(API.root + "user/details").then(
+      $http.get(API.root + "polls").then(
         function (result) {
-          $scope.polls = result.data;
+          $scope.polls = result.data.data;
 
-          console.log($scope.polls);
+          console.log( result.data.message,$scope.polls);
         },
         function (response) {
           console.log(response);

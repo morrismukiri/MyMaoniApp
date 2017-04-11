@@ -142,4 +142,20 @@ angular.module('starter.services', [])
       username: function () { return username; },
       role: function () { return role; }
     };
+  })
+  .filter("userNames", function ($q, $http, USER_ROLES, API) {
+    function fetch(input) {
+      var name = "";
+      $http.get(API.root + 'userdetail/' + input)
+        .then(function (result) {
+          console.log('user detail for ', input, ' retrieved successfully', result.data.data.name);
+          name = result.data.data.name;
+          // return name;
+        }, function (result) {
+          console.log('Fetching userdetail failed', result);
+        })
+        return name;
+    }
+    // fetch.$stateful = true;
+    return fetch;
   });
