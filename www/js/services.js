@@ -143,6 +143,7 @@ angular.module('starter.services', [])
       role: function () { return role; }
     };
   })
+  //Not the best way to do it. Used chained data from API instead.
   .filter("userDetails", function ($q, $http, USER_ROLES, API) {
     var cached = {};
     function fetch(id, field) {
