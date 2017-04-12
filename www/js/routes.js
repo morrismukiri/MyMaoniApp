@@ -71,6 +71,15 @@ angular.module('starter.routes', [])
           }
         }
       })
+      .state('tabsController.addPoll', {
+        url: '/addpoll',
+        views: {
+          'tab2': {
+            templateUrl: 'templates/add-poll.html',
+            controller: 'addPollCtrl'
+          }
+        }
+      })
 
 
       .state('tabsController.home', {
