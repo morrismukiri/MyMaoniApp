@@ -1,0 +1,53 @@
+<ion-view title="Add Poll">
+  <ion-content padding="true" class="has-header">
+    <div class="list list ">
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Title</span>
+        <input type="text" ng-model="data.title" placeholder="Title" >
+      </label>
+      <label class="item item-input item-select">
+        <span class="input-label">Category</span>
+          <select  ng-model="data.categoryId" >
+            <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+          </select>
+      </label>
+
+      <label class="item item-input item-textarea">
+        <span class="input-label">Description</span>
+        <textarea cols="30" rows="3" ng-model="data.description"></textarea>
+        <!--<input type="password" ng-model="data.password" placeholder="Password" >-->
+      </label>
+      <div class="card list ">
+        <div class="item item-divider item-calm">Poll availability</div>
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Opens on</span>
+          <input type="text" ng-model="data.openTime" placeholder="Voting starts at"  ng-click="fromDatepicker()">
+        </label>
+        <label class="item item-input item-floating-label" ng-click="toDatepicker()">
+          <span class="input-label">Closes on</span>
+          <input type="text" ng-model="data.closeTime" placeholder="Closes on" >
+        </label>
+      </div>
+
+  <div class="card list ">
+    <div class="item item-divider item-calm">Ansers type</div>
+    <label class="item item-radio">
+      <input type="radio" ng-model="data.type" value="open">
+      <div class="item-content">
+          Open
+      </div>
+      <i class="radio-icon ion-checkmark"></i>
+    </label>
+    <label class="item item-radio">
+      <input type="radio" ng-model="data.type" value="closed">
+      <div class="item-content">
+          Closed
+      </div>
+      <i class="radio-icon ion-checkmark"></i>
+    </label>
+  </div>
+   <button class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="save()">Next</button>
+
+    </div>
+  </ion-content>
+</ion-view>

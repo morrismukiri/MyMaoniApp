@@ -58,7 +58,7 @@ angular.module('starter.controllers', [])
     });
 
     $scope.$on(AUTH_EVENTS.notAuthenticated, function (event) {
-       if($state.is('app.login')) return;
+      if ($state.is('app.login')) return;
       AuthService.logout();
       $state.go('app.login');
 
@@ -116,19 +116,110 @@ angular.module('starter.controllers', [])
 
     }])
 
-  .controller('homeCtrl', ['$scope', '$stateParams',  'API', '$http', 'AuthService',
+  .controller('homeCtrl', ['$scope', '$stateParams', 'API', '$http', 'AuthService',
     function ($scope, $stateParams, API, $http, AuthService) {
 
       $http.get(API.root + "polls").then(
         function (result) {
           $scope.polls = result.data.data;
 
-          console.log( result.data.message,$scope.polls);
+          console.log(result.data.message, $scope.polls);
         },
         function (response) {
           console.log(response);
         }
       )
+
+    }])
+  .controller('addPollCtrl', ['$scope', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker',
+    function ($scope, $stateParams, API, $http, AuthService, moment, ionicDatePicker) {
+      $scope.data = {
+        "title": "",
+        "categoryId": 1,
+        "description": "",
+        "openTime": "",
+        "closeTime": "",
+        "targetGroup": 2,
+        "type": "open",
+        "userId": 3
+      };
+      $scope.categories = [
+        {
+          "id": 1,
+          "name": "nisi",
+          "description": "Non explicabo quis nulla sint eaque. Et aliquid nulla sit. Eius est quia eos.",
+          "parentId": 0,
+          "created_at": "2017-04-04 19:33:10",
+          "updated_at": "2017-04-04 19:33:10"
+        },
+        {
+          "id": 2,
+          "name": "repellendus",
+          "description": "Est enim et fuga ea eos consequuntur. Et quisquam nostrum ducimus consequatur illum voluptatem. Non minima cupiditate velit. Autem consequatur officiis similique nesciunt.",
+          "parentId": 0,
+          "created_at": "2017-04-04 19:33:10",
+          "updated_at": "2017-04-04 19:33:10"
+        },
+        {
+          "id": 3,
+          "name": "quasi",
+          "description": "Id id sunt et ipsam. Dignissimos voluptatem vero consequatur in et. Incidunt vitae dolores dolore aspernatur eum deserunt quidem.",
+          "parentId": 0,
+          "created_at": "2017-04-04 19:33:10",
+          "updated_at": "2017-04-04 19:33:10"
+        },
+        {
+          "id": 4,
+          "name": "est",
+          "description": "Omnis dolorem qui voluptatem earum doloribus. Provident debitis voluptate veritatis vel sit laboriosam aut. Ut maiores pariatur ipsum maxime voluptatem maxime non. Beatae delectus voluptas aut est.",
+          "parentId": 0,
+          "created_at": "2017-04-04 19:33:10",
+          "updated_at": "2017-04-04 19:33:10"
+        },
+        {
+          "id": 5,
+          "name": "exercitationem",
+          "description": "Et placeat ea reiciendis voluptas quia aut blanditiis. Voluptas aut exercitationem eos voluptatem sit vel.",
+          "parentId": 0,
+          "created_at": "2017-04-04 19:33:10",
+          "updated_at": "2017-04-04 19:33:10"
+        }];
+      var fromCallback = {
+        callback: function (val) {  //Mandatory
+          $scope.data.closeTime = moment(val).format("YYYY-MM-DD hh:mm:ss");
+        }
+      }
+      $scope.data.openTime = moment().format("YYYY-MM-DD hh:mm:ss");
+      $scope.fromDatepicker = function () {
+        ionicDatePicker.openDatePicker({
+          callback: function (val) {  //Mandatory
+            $scope.data.openTime = moment(val).format("YYYY-MM-DD hh:mm:ss");
+          },
+          from: moment().format("YYYY-MM-DD hh:mm:ss")
+        });
+      };
+
+      $scope.toDatepicker = function () {
+        ionicDatePicker.openDatePicker({
+          callback: function (val) {  //Mandatory
+            $scope.data.closeTime = moment(val).format("YYYY-MM-DD hh:mm:ss");
+          },
+          from: $scope.data.openTime
+        });
+      };
+      $scope.save = function () {
+
+        $http.post(API.root + "polls", $scope.data).then(
+          function (result) {
+            // $scope.polls = result.data.data;
+            console.log('Saved successfully');
+            console.log(result.data.message, $scope.polls);
+          },
+          function (response) {
+            console.log(response);
+          }
+        )
+      }
 
     }])
 
