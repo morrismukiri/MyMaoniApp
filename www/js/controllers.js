@@ -131,8 +131,8 @@ angular.module('starter.controllers', [])
       )
 
     }])
-  .controller('addPollCtrl', ['$scope', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker',
-    function ($scope, $stateParams, API, $http, AuthService, moment, ionicDatePicker) {
+  .controller('addPollCtrl', ['$scope', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', 'categories',
+    function ($scope, $stateParams, API, $http, AuthService, moment, ionicDatePicker, categories) {
       $scope.data = {
         "title": "",
         "categoryId": 1,
@@ -143,47 +143,17 @@ angular.module('starter.controllers', [])
         "type": "open",
         "userId": 3
       };
-      $scope.categories = [
-        {
-          "id": 1,
-          "name": "nisi",
-          "description": "Non explicabo quis nulla sint eaque. Et aliquid nulla sit. Eius est quia eos.",
-          "parentId": 0,
-          "created_at": "2017-04-04 19:33:10",
-          "updated_at": "2017-04-04 19:33:10"
-        },
-        {
-          "id": 2,
-          "name": "repellendus",
-          "description": "Est enim et fuga ea eos consequuntur. Et quisquam nostrum ducimus consequatur illum voluptatem. Non minima cupiditate velit. Autem consequatur officiis similique nesciunt.",
-          "parentId": 0,
-          "created_at": "2017-04-04 19:33:10",
-          "updated_at": "2017-04-04 19:33:10"
-        },
-        {
-          "id": 3,
-          "name": "quasi",
-          "description": "Id id sunt et ipsam. Dignissimos voluptatem vero consequatur in et. Incidunt vitae dolores dolore aspernatur eum deserunt quidem.",
-          "parentId": 0,
-          "created_at": "2017-04-04 19:33:10",
-          "updated_at": "2017-04-04 19:33:10"
-        },
-        {
-          "id": 4,
-          "name": "est",
-          "description": "Omnis dolorem qui voluptatem earum doloribus. Provident debitis voluptate veritatis vel sit laboriosam aut. Ut maiores pariatur ipsum maxime voluptatem maxime non. Beatae delectus voluptas aut est.",
-          "parentId": 0,
-          "created_at": "2017-04-04 19:33:10",
-          "updated_at": "2017-04-04 19:33:10"
-        },
-        {
-          "id": 5,
-          "name": "exercitationem",
-          "description": "Et placeat ea reiciendis voluptas quia aut blanditiis. Voluptas aut exercitationem eos voluptatem sit vel.",
-          "parentId": 0,
-          "created_at": "2017-04-04 19:33:10",
-          "updated_at": "2017-04-04 19:33:10"
-        }];
+      // $http.get(API.root + 'categories').then(function (res) {
+      //   $scope.categories = res.data.data;
+      //   console.log(res.data.data);
+      // }, function (err) {
+      //   console.log(res);
+      // })
+      categories.get().then(function (res) {
+        $scope.categories = res;
+      }, function () {
+        $scope.categories = undefined;
+      })
       var fromCallback = {
         callback: function (val) {  //Mandatory
           $scope.data.closeTime = moment(val).format("YYYY-MM-DD hh:mm:ss");

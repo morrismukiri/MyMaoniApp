@@ -90,6 +90,28 @@ angular.module('starter.services', [])
       role: function () { return role; }
     };
   })
+  .service("categories", function ($q, $http, USER_ROLES, API, $rootScope) {
+    var categories = {};
+    return {
+      get: function () {
+        var deferred = $q.defer();
+        if (!angular.equals(categories, {})) {
+          deferred.resolve(categories);
+        } else {
+          $http.get(API.root + 'categories').then(function (res) {
+            console.log(res.data.data)
+            categories = res.data.data;
+            deferred.resolve(res.data.data);
+            $rootScope.$$phase || $rootScope.apply();
+          }, function (err) {
+            console.log(err);
+            deferred.reject(err);
+          })
+        }
+        return deferred.promise;
+      }
+    }
+  })
   //Not the best way to do it. Used chained data from API instead.
   .filter("userDetails", function ($q, $http, USER_ROLES, API) {
     var cached = {};
