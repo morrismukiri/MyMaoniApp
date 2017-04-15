@@ -58,13 +58,6 @@ angular.module('starter.services', [])
           }
         })
 
-        // if ((name == 'admin' && pw == '1') || (name == 'user' && pw == '1')) {
-        //   // Make a request and receive your auth token from your server
-        //   storeUserCredentials(name + '.yourServerToken');
-        //   resolve('Login success.');
-        // } else {
-        //   reject('Login Failed.');
-        // }
       });
     };
 

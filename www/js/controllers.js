@@ -143,12 +143,6 @@ angular.module('starter.controllers', [])
         "type": "open",
         "userId": 3
       };
-      // $http.get(API.root + 'categories').then(function (res) {
-      //   $scope.categories = res.data.data;
-      //   console.log(res.data.data);
-      // }, function (err) {
-      //   console.log(res);
-      // })
       categories.get().then(function (res) {
         $scope.categories = res;
       }, function () {
