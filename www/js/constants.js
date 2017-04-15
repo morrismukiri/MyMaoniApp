@@ -11,6 +11,6 @@ angular.module('starter')
   })
 
   .constant('API', {
-    root:'http://localhost:8000/api/v1/'
-    // root: 'http://40.10.10.192/mymaoniback/public/index.php/api/v1/'
+    // root:'http://localhost:8000/api/v1/'
+    root: 'http://40.10.10.192/mymaoniback/public/index.php/api/v1/'
   });
