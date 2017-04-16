@@ -131,8 +131,8 @@ angular.module('starter.controllers', [])
       )
 
     }])
-  .controller('addPollCtrl', ['$scope', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', 'categories',
-    function ($scope, $stateParams, API, $http, AuthService, moment, ionicDatePicker, categories) {
+  .controller('addPollCtrl', ['$scope','$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', 'categories',
+    function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, categories) {
       $scope.data = {
         "title": "",
         "categoryId": 1,
@@ -144,7 +144,6 @@ angular.module('starter.controllers', [])
         "userId": 3
       };
       $scope.answers = [{
-        count: 1,
         text: ""
       }];
       $scope.addAnswer = function () {
@@ -187,9 +186,23 @@ angular.module('starter.controllers', [])
 
         $http.post(API.root + "polls", $scope.data).then(
           function (result) {
-            // $scope.polls = result.data.data;
+            $scope.polls = result.data.data;
             console.log('Saved successfully');
-            console.log(result.data.message, $scope.polls);
+            console.log(result.data.message, JSON.stringify($scope.polls));
+            $scope.answers.map(function (answer) {
+              return answer.pollId = result.data.data.id;
+            })
+            console.log(angular.toJson($scope.answers));
+            var data = JSON.parse(angular.toJson($scope.answers))//remove the angular index
+            $http.post(API.root + "answers", data).then(
+              function (res) {
+                console.log('Answers saved successfully');
+                console.log(result.data.message, $scope.answers);
+                $state.go('tabsController.home', {}, { reload: true });
+              },
+              function (err) {
+                console.log(err);
+              })
           },
           function (response) {
             console.log(response);
