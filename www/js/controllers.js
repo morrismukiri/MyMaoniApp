@@ -131,7 +131,7 @@ angular.module('starter.controllers', [])
       )
 
     }])
-  .controller('addPollCtrl', ['$scope','$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', 'categories',
+  .controller('addPollCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', 'categories',
     function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, categories) {
       $scope.data = {
         "title": "",
@@ -141,7 +141,7 @@ angular.module('starter.controllers', [])
         "closeTime": "",
         "targetGroup": 2,
         "type": "open",
-        "userId": 3
+        "userId": 3  //TODO get from token
       };
       $scope.answers = [{
         text: ""
@@ -209,7 +209,36 @@ angular.module('starter.controllers', [])
           }
         )
       }
+    }])
 
+  .controller('viewPollCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate',
+    function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, $rootScope, $ionicScrollDelegate) {
+      $scope.poll = {};
+      $http.get(API.root + "polls/" + $stateParams.pollId).then(function (res) {
+        $scope.poll = res.data.data;
+        $rootScope.$$phase || $rootScope.apply();
+        console.log($scope.poll);
+      }, function (err) {
+        console.log(err);
+      })
+      $scope.addComment = function (message) {
+        var data = {
+          "pollId": $scope.poll.id,
+          "comment": $scope.message,
+          "userId": 3 //TODO get from token
+        }
+        $http.post(API.root + 'opinions', data).then(
+          function (res) {
+            console.log(res.data.data);
+            $scope.poll.opinions.push(res.data.data);
+            $scope.message = "";
+            $ionicScrollDelegate.scrollBottom(true);
+          }, function (err) {
+            console.log("ERROR :", err);
+            console.log("Data :", data);
+          }
+        )
+      }
     }])
 
   .controller('pollsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller

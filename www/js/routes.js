@@ -86,6 +86,15 @@ angular.module('starter.routes', [])
           }
         }
       })
+      .state('polls.viewPoll', {
+        url: '/view/:pollId',
+        views: {
+          'form': {
+            templateUrl: 'templates/view-poll.html',
+            controller: 'viewPollCtrl'
+          }
+        }
+      })
       .state('polls.addanswers', {
         url: '/addanswers',
         views: {
