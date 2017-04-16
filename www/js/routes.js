@@ -71,16 +71,29 @@ angular.module('starter.routes', [])
           }
         }
       })
-      .state('tabsController.addPoll', {
+      .state('polls', {
+        url: '/polls',
+        templateUrl: 'templates/polls-container.html',
+        abstract: true,
+        controller: 'addPollCtrl'
+      })
+      .state('polls.addPoll', {
         url: '/addpoll',
         views: {
-          'tab2': {
+          'form': {
             templateUrl: 'templates/add-poll.html',
-            controller: 'addPollCtrl'
+
           }
         }
       })
-
+      .state('polls.addanswers', {
+        url: '/addanswers',
+        views: {
+          'form': {
+            templateUrl: 'templates/add-poll-answers.html',
+          }
+        }
+      })
 
       .state('tabsController.home', {
         url: '/home',

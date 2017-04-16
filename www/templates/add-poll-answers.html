@@ -1,0 +1,17 @@
+<ion-view title="Add Options">
+  <ion-content padding="true" class="has-header">
+    <div class="list list ">
+      <div ng-repeat="answer in answers">
+        <label class="item item-input item-floating-label">
+        <span class="input-label">Option {{$index+1}}</span>
+        <input type="text" ng-model="answer.text" placeholder="option {{$index+1}}" >
+      </label>
+        <button ng-if="$index == answers.length - 1" ng-click="addAnswer()"  class="button button-positive"><i class="icon ion-plus"></i></button>
+        <button ng-if="$index != answers.length - 1" ng-click="removeAnswer($index)"  class="button button-assertive"><i class="icon ion-minus"></i></button>
+      </div>
+
+      <button class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="save()">Next</button>
+
+    </div>
+  </ion-content>
+</ion-view>

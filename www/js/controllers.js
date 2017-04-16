@@ -143,6 +143,18 @@ angular.module('starter.controllers', [])
         "type": "open",
         "userId": 3
       };
+      $scope.answers = [{
+        count: 1,
+        text: ""
+      }];
+      $scope.addAnswer = function () {
+        $scope.answers.push({
+          text: "",
+        });
+      }
+      $scope.removeAnswer = function (index) {
+        $scope.answers.splice(index, 1);
+      }
       categories.get().then(function (res) {
         $scope.categories = res;
       }, function () {
