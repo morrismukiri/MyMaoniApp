@@ -1,5 +1,9 @@
 <ion-view title="Home" id="page2">
   <ion-content padding="true" class=" manual-remove-top-padding has-header">
+    <ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="doRefresh()">
+  </ion-refresher>
     <ion-list>
       <div class="list card stable-bg" ng-repeat="poll in polls">
         <div class="item">

@@ -129,6 +129,22 @@ angular.module('starter.controllers', [])
           console.log(response);
         }
       )
+      $scope.doRefresh = function () {
+        $http.get(API.root + "polls").then(
+          function (result) {
+            $scope.polls = result.data.data;
+
+            console.log(result.data.message, $scope.polls);
+          },
+          function (response) {
+            console.log(response);
+          }
+        )
+          .finally(function () {
+            // Stop the ion-refresher from spinning
+            $scope.$broadcast('scroll.refreshComplete');
+          });
+      };
 
     }])
   .controller('addPollCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', 'categories',
