@@ -1,11 +1,12 @@
 angular.module('starter.services', [])
 
-  .service('AuthService', function ($q, $http, USER_ROLES, API) {
+  .service('AuthService', function ($q, $http, USER_ROLES, API, jwtHelper) {
     var LOCAL_TOKEN_KEY = 'token';
     var username = '';
     var isAuthenticated = false;
     var role = '';
     var authToken;
+    var usrerId;
 
     function loadUserCredentials() {
       var token = window.localStorage.getItem(LOCAL_TOKEN_KEY);
@@ -21,6 +22,7 @@ angular.module('starter.services', [])
 
     function useCredentials(token) {
       username = token.split('.')[0];
+      userId = jwtHelper.decodeToken(token).sub;
       isAuthenticated = true;
       authToken = token;
 
@@ -80,7 +82,8 @@ angular.module('starter.services', [])
       isAuthorized: isAuthorized,
       isAuthenticated: function () { return isAuthenticated; },
       username: function () { return username; },
-      role: function () { return role; }
+      role: function () { return role; },
+      userId: userId
     };
   })
   .service("categories", function ($q, $http, USER_ROLES, API, $rootScope) {

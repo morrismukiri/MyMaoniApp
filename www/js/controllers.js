@@ -157,7 +157,7 @@ angular.module('starter.controllers', [])
         "closeTime": "",
         "targetGroup": 2,
         "type": "open",
-        "userId": 3  //TODO get from token
+        "userId": AuthService.userId
       };
       $scope.answers = [{
         text: ""
@@ -241,7 +241,7 @@ angular.module('starter.controllers', [])
         var data = {
           "pollId": $scope.poll.id,
           "comment": $scope.message,
-          "userId": 3 //TODO get from token
+          "userId": AuthService.userId
         }
         $http.post(API.root + 'opinions', data).then(
           function (res) {
