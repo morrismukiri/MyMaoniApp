@@ -6,7 +6,7 @@ angular.module('starter.services', [])
     var isAuthenticated = false;
     var role = '';
     var authToken;
-    var usrerId;
+    var userId;
 
     function loadUserCredentials() {
       var token = window.localStorage.getItem(LOCAL_TOKEN_KEY);

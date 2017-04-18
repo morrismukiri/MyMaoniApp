@@ -23,3 +23,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', end
   color: inherit;
   text-decoration: inherit;
 }
+.center{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
