@@ -139,7 +139,21 @@ angular.module('starter.routes', [])
         templateUrl: 'templates/tabsController.html',
         abstract: true
       })
+      .state('signup', {
+        url: '/signup',
+        templateUrl: 'templates/signup/signup-container.html',
+        abstract: true,
+        controller: 'signupCtrl'
+      })
+      .state('signup.basic', {
+        url: '/basic',
+        views: {
+          'form': {
+            templateUrl: 'templates/signup/signup-basic.html',
 
+          }
+        }
+      })
     // $urlRouterProvider.otherwise('/page1/home')
     $urlRouterProvider.otherwise('/tabs/home');
 

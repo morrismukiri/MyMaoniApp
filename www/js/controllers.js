@@ -1,5 +1,6 @@
 angular.module('starter.controllers', [])
 
+
   .controller('AppCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $location, $ionicPopup, $state, AuthService, AUTH_EVENTS, $stateParams, ionicMaterialInk, ionicMaterialMotion, API, $http) {
 
     // With the new view caching in Ionic, Controllers are only called
@@ -256,6 +257,9 @@ angular.module('starter.controllers', [])
         )
       }
     }])
+  .controller('signupCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $location, $ionicPopup, $state, AuthService, AUTH_EVENTS, $stateParams, ionicMaterialInk, ionicMaterialMotion, API, $http) {
+
+  })
 
   .controller('pollsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function

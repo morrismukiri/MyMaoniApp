@@ -1,0 +1,38 @@
+
+<ion-view view-title="Sign Up" class="" style="background: url(img/material-graphite.jpg) center; background-size: cover;" hide-nav-bar="true" >
+  <ion-content class="padding">
+
+  <div class="row responsive-sm ">
+	  <div class="col">
+		   <div class="app-logo"><img src="img/logo.png"></div>
+
+			<div class="list list-inset removePM">
+			  <label class="item item-input  item-floating-label">
+          <span class="input-label">Full Name</span>
+          <input type="text" placeholder="Full Name" ng-model="data.name">
+        </label>
+			  <!--<label class="item item-input  item-floating-label">
+          <span class="input-label">Email Address</span>
+          <input type="email" placeholder="Email Address" ng-model="data.email">
+        </label>-->
+			  <label class="item item-input  item-floating-label">
+          <span class="input-label">Phone Number</span>
+          <input type="tel" placeholder="Phone Number" ng-pattern="/(0|\+?254)7([0-3|7])(\d){7}/i" ng-model="data.phone">
+        </label>
+			  <!--<label class="item item-input  item-floating-label">
+          <span class="input-label">Password</span>
+          <input type="password" placeholder="Password">
+        </label>-->
+			</div>
+
+			<a class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ui-sref="signup.verify_phone">Next</a>
+	  </div>
+  </div>
+
+	<!--<div class="row  padding removePM">
+	  <div class="col"> <a class=" button-positive button button-block" ng-click="facebookSignIn()"><i class="icon ion-social-facebook"></i></a> </div>
+	  <div class="col"> <a class="button-calm button button-block" ng-click="twitterSignIn()"><i class="icon ion-social-twitter"></i></a> </div>
+	</div>-->
+
+  </ion-content>
+</ion-view>
