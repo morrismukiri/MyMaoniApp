@@ -163,6 +163,15 @@ angular.module('starter.routes', [])
           }
         }
       })
+      .state('signup.additional', {
+        url: '/additional',
+        views: {
+          'form': {
+            templateUrl: 'templates/signup/additional.html',
+
+          }
+        }
+      })
     // $urlRouterProvider.otherwise('/page1/home')
     $urlRouterProvider.otherwise('/tabs/home');
 
