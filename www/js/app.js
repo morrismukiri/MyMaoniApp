@@ -57,7 +57,8 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services','
     }
 
     if (!AuthService.isAuthenticated()) {
-      if ((next.name !== 'app.login' )&& (next.name !== 'app.signup' )) {
+      var allowedStates = ['app.login', 'signup.basic', 'signup.verify_phone', 'signup.additional'];
+      if ((allowedStates.indexOf(next.name)<0)) {
         event.preventDefault();
         $state.go('app.login');
       }
