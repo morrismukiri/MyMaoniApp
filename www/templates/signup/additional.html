@@ -10,8 +10,12 @@
           <span class="input-label">Email Address</span>
           <input type="email" placeholder="Email Address" ng-model="data.email">
         </label>
+          <label class="item item-input item-floating-label">
+          <span class="input-label">Date of Birth</span>
+          <input type="text" ng-model="data.dob" placeholder="Date of Birth"  ng-click="dobDatePicker()">
+        </label>
           <div class="card list ">
-            <div class="item item-divider item-calm">Gender</div>
+            <div class="item item-divider">Gender</div>
             <label class="item item-radio">
       <input type="radio" ng-model="data.gender" value="male">
       <div class="item-content">
@@ -29,7 +33,7 @@
           </div>
           <label class="item item-input  item-floating-label">
           <span class="input-label">Password</span>
-          <input type="password" placeholder="Password">
+          <input type="password" placeholder="Password" ng-model="data.password">
         </label>
         </div>
 

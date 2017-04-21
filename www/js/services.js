@@ -62,7 +62,18 @@ angular.module('starter.services', [])
 
       });
     };
-
+    var signup = function (data) {
+      return $q(function (resolve, reject) {
+        $http.post(API.root + "signup", data).then(function (res) {
+          storeUserCredentials('Bearer ' + res.data.token);
+          console.log(res.data.data);
+          resolve('signup success.');
+        }, function (err) {
+          console.log(err);
+          reject('Signup Failed.');
+        })
+      })
+    };
     var logout = function () {
       destroyUserCredentials();
     };
@@ -78,6 +89,7 @@ angular.module('starter.services', [])
 
     return {
       login: login,
+      signup: signup,
       logout: logout,
       isAuthorized: isAuthorized,
       isAuthenticated: function () { return isAuthenticated; },

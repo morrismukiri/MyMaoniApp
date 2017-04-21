@@ -257,7 +257,7 @@ angular.module('starter.controllers', [])
         )
       }
     }])
-  .controller('signupCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $location, $ionicPopup, $state, AuthService, AUTH_EVENTS, $stateParams, ionicMaterialInk, ionicMaterialMotion, API, $http) {
+  .controller('signupCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $location, $ionicPopup, $state, AuthService, AUTH_EVENTS, $stateParams, ionicMaterialInk, ionicMaterialMotion, API, $http, ionicDatePicker) {
     $scope.data = {
       "name": "",
       "email": "",
@@ -291,7 +291,31 @@ angular.module('starter.controllers', [])
       }, function (err) {
         console.log(err);
       })
+    };
+    $scope.do_signup = function () {
+      console.log('Signup data :', JSON.stringify($scope.data))
+      AuthService.signup($scope.data).then(function (res) {
+        console.log(res);
+        $state.go('tabsController.home', {}, { reload: true });
+      }, function (err) {
+        var alertPopup = $ionicPopup.alert({
+          title: 'Signup failed!',
+          template: 'Please check your details!'
+        });
+        // to activate ink on modal
+        $timeout(function () {
+          ionicMaterialInk.displayEffect();
+        }, 0);
+      });
     }
+    $scope.dobDatePicker = function () {
+        ionicDatePicker.openDatePicker({
+          callback: function (val) {  //Mandatory
+            $scope.data.dob = moment(val).format("YYYY-MM-DD");
+          },
+          to: moment().format("YYYY-MM-DD")
+        });
+      };
 
   })
 
