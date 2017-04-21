@@ -258,6 +258,40 @@ angular.module('starter.controllers', [])
       }
     }])
   .controller('signupCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $location, $ionicPopup, $state, AuthService, AUTH_EVENTS, $stateParams, ionicMaterialInk, ionicMaterialMotion, API, $http) {
+    $scope.data = {
+      "name": "",
+      "email": "",
+      "phone": "0716043576",
+      "gender": "",
+      "address": "",
+      "dob": "",
+      "password": ""
+    };
+
+    $scope.send_verification = function (phone) {
+      var data = {
+        "phone": phone
+      };
+      //TODO show dialog
+      $http.post(API.root + "send_verification", data).then(function (res) {
+        console.log(res.data.data);
+      }, function (err) {
+        console.log(err);
+      })
+    }
+
+    $scope.check_verification = function (phone) {
+      var data = {
+        "phone": $scope.data.phone,
+        "code": $scope.data.verificationCode
+      };
+      //TODO show dialog
+      $http.post(API.root + "check_verification", data).then(function (res) {
+        console.log(res.data.data);
+      }, function (err) {
+        console.log(err);
+      })
+    }
 
   })
 

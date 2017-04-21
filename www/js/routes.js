@@ -154,6 +154,15 @@ angular.module('starter.routes', [])
           }
         }
       })
+      .state('signup.verify_phone', {
+        url: '/verify_phone',
+        views: {
+          'form': {
+            templateUrl: 'templates/signup/verify_phone.html',
+
+          }
+        }
+      })
     // $urlRouterProvider.otherwise('/page1/home')
     $urlRouterProvider.otherwise('/tabs/home');
 
