@@ -103,6 +103,15 @@ angular.module('starter.routes', [])
           }
         }
       })
+      .state('polls.vote', {
+        url: '/vote/:pollId',
+        views: {
+          'form': {
+            templateUrl: 'templates/vote.html',
+            controller: 'voteCtrl'
+          }
+        }
+      })
 
       .state('tabsController.home', {
         url: '/home',

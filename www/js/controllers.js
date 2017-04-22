@@ -257,6 +257,35 @@ angular.module('starter.controllers', [])
         )
       }
     }])
+  .controller('voteCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate',
+    function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, $rootScope, $ionicScrollDelegate) {
+      $scope.poll = {};
+      $scope.data={};
+      $scope.selection = null;
+      $http.get(API.root + "polls/" + $stateParams.pollId).then(function (res) {
+        $scope.poll = res.data.data;
+        $rootScope.$$phase || $rootScope.apply();
+        console.log($scope.poll);
+      }, function (err) {
+        console.log(err);
+      });
+      $scope.addVote = function () {
+        var data = {
+          "pollId": $scope.poll.id,
+          "answerId": $scope.data.selection,
+          "userId": AuthService.userId
+        }
+        $http.post(API.root + 'vote', data).then(
+          function (res) {
+            console.log(res.data.data);
+            $state.go('tabsController.home', {}, { reload: true });
+          }, function (err) {
+            console.log("ERROR :", err);
+            console.log("Data :", data);
+          }
+        )
+      }
+    }])
   .controller('signupCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $location, $ionicPopup, $state, AuthService, AUTH_EVENTS, $stateParams, ionicMaterialInk, ionicMaterialMotion, API, $http, ionicDatePicker) {
     $scope.data = {
       "name": "",
@@ -309,13 +338,13 @@ angular.module('starter.controllers', [])
       });
     }
     $scope.dobDatePicker = function () {
-        ionicDatePicker.openDatePicker({
-          callback: function (val) {  //Mandatory
-            $scope.data.dob = moment(val).format("YYYY-MM-DD");
-          },
-          to: moment().format("YYYY-MM-DD")
-        });
-      };
+      ionicDatePicker.openDatePicker({
+        callback: function (val) {  //Mandatory
+          $scope.data.dob = moment(val).format("YYYY-MM-DD");
+        },
+        to: moment().format("YYYY-MM-DD")
+      });
+    };
 
   })
 
