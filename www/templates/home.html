@@ -14,12 +14,12 @@
         <div class="item item-body">
          <a ui-sref="polls.viewPoll({pollId: poll.id})" class="link-unstyled">  {{poll.description}} </a>
           <p>
-            <a class="subdued" ui-sref="polls.viewPoll({pollId: poll.id})">{{poll.answers.length}} votes</a>
+            <a class="subdued" ui-sref="polls.viewPoll({pollId: poll.id})">{{poll.votes.length}} votes</a>
             <a class="subdued" ui-sref="polls.viewPoll({pollId: poll.id})">{{poll.opinions.length}}  Comments</a>
           </p>
         </div>
         <div class="item tabs tabs-default tabs-icon-left">
-          <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"><i class="icon ion-thumbsup"></i> vote </a>
+          <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" ui-sref="polls.vote({pollId: poll.id})"><i class="icon ion-thumbsup"></i> vote </a>
           <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" ui-sref="polls.viewPoll({pollId: poll.id})"> <i class="icon ion-chatbox"></i> Comment </a>
           <!--<a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"> <i class="icon ion-share"></i> Share </a>-->
         </div>
