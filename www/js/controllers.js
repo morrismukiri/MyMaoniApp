@@ -380,11 +380,36 @@ angular.module('starter.controllers', [])
 
     }])
 
-  .controller('communityDiscussionCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-    // You can include any angular dependencies as parameters for this function
-    // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, $stateParams) {
+  .controller('communityDiscussionCtrl', ['$scope', '$stateParams', 'API', '$http', 'AuthService',
+  function ($scope, $stateParams, API, $http, AuthService) {
 
+      $http.get(API.root + "usercontribution/"+AuthService.userId).then(
+        function (result) {
+          $scope.opinions= result.data.data.opinions
+          $scope.votes = result.data.data.votes;
+
+          console.log(result.data.message, $scope.polls);
+        },
+        function (response) {
+          console.log(response);
+        }
+      )
+      $scope.doRefresh = function () {
+        $http.get(API.root + "usercontribution/"+AuthService.userId).then(
+          function (result) {
+            $scope.polls = result.data.data;
+
+            console.log(result.data.message, $scope.polls);
+          },
+          function (response) {
+            console.log(response);
+          }
+        )
+          .finally(function () {
+            // Stop the ion-refresher from spinning
+            $scope.$broadcast('scroll.refreshComplete');
+          });
+      };
 
     }])
   ;
