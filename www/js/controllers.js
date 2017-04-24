@@ -290,7 +290,7 @@ angular.module('starter.controllers', [])
     $scope.data = {
       "name": "",
       "email": "",
-      "phone": "0716043576",
+      "phone": "",
       "gender": "",
       "address": "",
       "dob": "",
