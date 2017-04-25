@@ -16,8 +16,8 @@ angular.module('starter.controllers', [])
     //--------------------------------------------
     $scope.data = {};
     console.log("api", API);
-    $scope.login = function (data) {
-      AuthService.login(data.username, data.password).then(function (authenticated) {
+    $scope.login = function () {
+      AuthService.login($scope.data.email, $scope.data.password).then(function (authenticated) {
         $state.go('tabsController.home', {}, { reload: true });
         $scope.setCurrentUsername(data.username);
       }, function (err) {

@@ -45,12 +45,14 @@ angular.module('starter.services', [])
       window.localStorage.removeItem(LOCAL_TOKEN_KEY);
     }
 
-    var login = function (name, pw) {
+    var login = function (email, password) {
       return $q(function (resolve, reject) {
-        $http.post(API.root + 'authenticate', {
-          "email": name,
-          "password": pw
-        }).then(function (result) {
+        var data = {
+          "email": email,
+          "password": password
+        }
+        console.log('login data:', data);
+        $http.post(API.root + 'authenticate',data ).then(function (result) {
 
           storeUserCredentials('Bearer ' + result.data.token);
           resolve('Login success.');
