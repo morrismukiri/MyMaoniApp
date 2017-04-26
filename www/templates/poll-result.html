@@ -1,0 +1,33 @@
+<ion-view title="Poll Results">
+  <ion-content padding="true" class="has-header">
+    <div class="card">
+      <div class="item item-divider">
+        Poll Response
+      </div>
+      <h3>{{poll.title}}</h3>
+      <div class="item item-text-wrap">
+        <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-legend="true" chart-options="options">
+        </canvas>
+      </div>
+      <h4 class="border-top">Votes</h4>
+      <div class="list">
+        <div class="item " ng-repeat="result in voteResult" style="vertical-align:middle">
+          <span class="h4" > {{ result.answer.text}}</span>
+          <div class="right numberCircle"><span class="assertive">{{ result.totalVotes}}</span></div>
+        </div>
+      </div>
+    </div>
+    <h4 class="border-top">Comments</h4>
+      <div class="list">
+
+        <a class="item item-avatar" ng-repeat="comment in poll.opinions">
+          <img src="img/material1.jpg">
+          <h2>{{comment.user.name}}</h2>
+          <p>Posted <span am-time-ago="comment.created_at"></p>
+          <span class=" item-body">{{comment.comment}}</span>
+        </a>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>

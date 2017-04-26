@@ -260,7 +260,7 @@ angular.module('starter.controllers', [])
   .controller('voteCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate',
     function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, $rootScope, $ionicScrollDelegate) {
       $scope.poll = {};
-      $scope.data={};
+      $scope.data = {};
       $scope.selection = null;
       $http.get(API.root + "polls/" + $stateParams.pollId).then(function (res) {
         $scope.poll = res.data.data;
@@ -285,6 +285,53 @@ angular.module('starter.controllers', [])
           }
         )
       }
+    }])
+  .controller('resultCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate',
+    function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, $rootScope, $ionicScrollDelegate) {
+      $scope.labels = [];
+      $scope.data = [];
+      $scope.options = { legend: { display: true, position: 'bottom' } };
+      $scope.poll = {};
+      $http.get(API.root + "polls/" + $stateParams.pollId).then(function (res) {
+        $scope.poll = res.data.data;
+        $rootScope.$$phase || $rootScope.apply();
+        console.log($scope.poll);
+      }, function (err) {
+        console.log(err);
+      })
+      $scope.voteResult =null;
+      $http.get(API.root + "pollresultnumbers/" + $stateParams.pollId).then(function (res) {
+        $scope.voteResult = res.data.data;
+
+        var labels = [];
+        var dataSet = [];
+        $scope.answersFromVotes = [];
+        for (var i = 0; i < $scope.voteResult.length; i++) {
+          $scope.answersFromVotes.push($scope.voteResult[i].answer.text);
+          $scope.labels.push($scope.voteResult[i].answer.text);
+          $scope.data.push($scope.voteResult[i].totalVotes);
+        }
+        console.log("Answers from Votes: ", $scope.answersFromVotes);
+        console.log('labels: ', labels);
+        console.log('dataSet: ', dataSet);
+        // $rootScope.$$phase || $rootScope.apply();
+        // console.log(JSON.stringify($scope.voteResult), $scope.voteResult);
+      }, function (err) {
+        console.log(err);
+      });
+
+
+      $scope.labels1 = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+      $scope.data1 = [300, 500, 100];
+
+      // $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+      // $scope.series = ['Series A', 'Series B'];
+      // $scope.data = [
+      //   [65, 59, 80, 81, 56, 55, 40],
+      //   [28, 48, 40, 19, 86, 27, 90]
+      // ];
+
+      // }
     }])
   .controller('signupCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $location, $ionicPopup, $state, AuthService, AUTH_EVENTS, $stateParams, ionicMaterialInk, ionicMaterialMotion, API, $http, ionicDatePicker) {
     $scope.data = {
@@ -349,9 +396,9 @@ angular.module('starter.controllers', [])
   })
 
   .controller('pollsCtrl', ['$scope', '$stateParams', 'API', '$http', 'AuthService',
-  function ($scope, $stateParams, API, $http, AuthService) {
+    function ($scope, $stateParams, API, $http, AuthService) {
 
-      $http.get(API.root + "pollsbyuser/"+AuthService.userId).then(
+      $http.get(API.root + "pollsbyuser/" + AuthService.userId).then(
         function (result) {
           $scope.polls = result.data.data;
 
@@ -362,7 +409,7 @@ angular.module('starter.controllers', [])
         }
       )
       $scope.doRefresh = function () {
-        $http.get(API.root + "pollsbyuser/"+AuthService.userId).then(
+        $http.get(API.root + "pollsbyuser/" + AuthService.userId).then(
           function (result) {
             $scope.polls = result.data.data;
 
@@ -381,11 +428,11 @@ angular.module('starter.controllers', [])
     }])
 
   .controller('communityDiscussionCtrl', ['$scope', '$stateParams', 'API', '$http', 'AuthService',
-  function ($scope, $stateParams, API, $http, AuthService) {
+    function ($scope, $stateParams, API, $http, AuthService) {
 
-      $http.get(API.root + "usercontribution/"+AuthService.userId).then(
+      $http.get(API.root + "usercontribution/" + AuthService.userId).then(
         function (result) {
-          $scope.opinions= result.data.data.opinions
+          $scope.opinions = result.data.data.opinions
           $scope.votes = result.data.data.votes;
 
           console.log(result.data.message, $scope.polls);
@@ -395,7 +442,7 @@ angular.module('starter.controllers', [])
         }
       )
       $scope.doRefresh = function () {
-        $http.get(API.root + "usercontribution/"+AuthService.userId).then(
+        $http.get(API.root + "usercontribution/" + AuthService.userId).then(
           function (result) {
             $scope.polls = result.data.data;
 

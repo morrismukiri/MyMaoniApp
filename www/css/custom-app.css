@@ -28,3 +28,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', end
   margin-right: auto;
   display: block;
 }
+
+.numberCircle {
+    border-radius: 50%;
+    width: 45px;
+    font-size: 32px;
+    border: 2px solid #20ab2b;
+    /*display: inline-block;*/
+}
+.numberCircle span {
+    text-align: center;
+    line-height: 40px;
+    display: block;
+}
+.right {
+  float: right;
+}
