@@ -158,7 +158,7 @@ angular.module('starter.controllers', [])
         "closeTime": "",
         "targetGroup": 2,
         "type": "open",
-        "userId": AuthService.userId
+        "userId": AuthService.getUserId()
       };
       $scope.answers = [{
         text: ""
@@ -242,7 +242,7 @@ angular.module('starter.controllers', [])
         var data = {
           "pollId": $scope.poll.id,
           "comment": $scope.message,
-          "userId": AuthService.userId
+          "userId": AuthService.getUserId()
         }
         $http.post(API.root + 'opinions', data).then(
           function (res) {
@@ -273,7 +273,7 @@ angular.module('starter.controllers', [])
         var data = {
           "pollId": $scope.poll.id,
           "answerId": $scope.data.selection,
-          "userId": AuthService.userId
+          "userId": AuthService.getUserId()
         }
         $http.post(API.root + 'vote', data).then(
           function (res) {
@@ -398,7 +398,7 @@ angular.module('starter.controllers', [])
   .controller('pollsCtrl', ['$scope', '$stateParams', 'API', '$http', 'AuthService',
     function ($scope, $stateParams, API, $http, AuthService) {
 
-      $http.get(API.root + "pollsbyuser/" + AuthService.userId).then(
+      $http.get(API.root + "pollsbyuser/" + AuthService.getUserId()).then(
         function (result) {
           $scope.polls = result.data.data;
 
@@ -409,7 +409,7 @@ angular.module('starter.controllers', [])
         }
       )
       $scope.doRefresh = function () {
-        $http.get(API.root + "pollsbyuser/" + AuthService.userId).then(
+        $http.get(API.root + "pollsbyuser/" + AuthService.getUserId()).then(
           function (result) {
             $scope.polls = result.data.data;
 
@@ -430,7 +430,7 @@ angular.module('starter.controllers', [])
   .controller('communityDiscussionCtrl', ['$scope', '$stateParams', 'API', '$http', 'AuthService',
     function ($scope, $stateParams, API, $http, AuthService) {
 
-      $http.get(API.root + "usercontribution/" + AuthService.userId).then(
+      $http.get(API.root + "usercontribution/" + AuthService.getUserId()).then(
         function (result) {
           $scope.opinions = result.data.data.opinions
           $scope.votes = result.data.data.votes;
@@ -442,7 +442,7 @@ angular.module('starter.controllers', [])
         }
       )
       $scope.doRefresh = function () {
-        $http.get(API.root + "usercontribution/" + AuthService.userId).then(
+        $http.get(API.root + "usercontribution/" + AuthService.getUserId()).then(
           function (result) {
             $scope.polls = result.data.data;
 

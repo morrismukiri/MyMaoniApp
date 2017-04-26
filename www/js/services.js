@@ -46,7 +46,7 @@ angular.module('starter.services', [])
           "password": password
         }
         console.log('login data:', data);
-        $http.post(API.root + 'authenticate',data ).then(function (result) {
+        $http.post(API.root + 'authenticate', data).then(function (result) {
 
           storeUserCredentials('Bearer ' + result.data.token);
           resolve('Login success.');
@@ -81,6 +81,10 @@ angular.module('starter.services', [])
       return (isAuthenticated && authorizedRoles.indexOf(role) !== -1);
     };
 
+    var getUserId = function () {
+      return userId;
+    }
+
     loadUserCredentials();
 
     return {
@@ -91,7 +95,7 @@ angular.module('starter.services', [])
       isAuthenticated: function () { return isAuthenticated; },
       username: function () { return username; },
       role: function () { return role; },
-      userId: userId
+      getUserId: getUserId
     };
   })
   .service("categories", function ($q, $http, USER_ROLES, API, $rootScope) {
