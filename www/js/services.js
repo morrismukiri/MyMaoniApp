@@ -26,13 +26,6 @@ angular.module('starter.services', [])
       isAuthenticated = true;
       authToken = token;
 
-      if (username == 'admin') {
-        role = USER_ROLES.admin
-      }
-      if (username == 'user') {
-        role = USER_ROLES.public
-      }
-
       // Set the token as header for your requests!
       $http.defaults.headers.common['Authorization'] = token;
     }
@@ -40,6 +33,7 @@ angular.module('starter.services', [])
     function destroyUserCredentials() {
       authToken = undefined;
       username = '';
+      userId = undefined;
       isAuthenticated = false;
       $http.defaults.headers.common['X-Auth-Token'] = undefined;
       window.localStorage.removeItem(LOCAL_TOKEN_KEY);
