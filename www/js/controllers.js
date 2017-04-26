@@ -290,7 +290,7 @@ angular.module('starter.controllers', [])
     function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, $rootScope, $ionicScrollDelegate) {
       $scope.labels = [];
       $scope.data = [];
-      $scope.colors = ['#387ef5', '#33cd5f', '#ef473a', '#ffc900', '#4D5360', '#11c1f3', '#'];
+      $scope.colors = ['#387ef5', '#33cd5f', '#ef473a', '#ffc900', '#4D5360', '#11c1f3', '#886aea'];
       $scope.options = { legend: { display: true, position: 'bottom', } };
       $scope.poll = {};
       // ChartJsProvider.setOptions({ colors : [ '#387ef5', '#11c1f3', '#33cd5f', '#ffc900', '#ef473a', '#886aea', '#4D5360'] });
