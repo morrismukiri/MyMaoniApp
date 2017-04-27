@@ -44,3 +44,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', end
 .right {
   float: right;
 }
+.signup {
+    width: 50%;
+    font-size: initial;
+    margin: 0 auto;
+}
