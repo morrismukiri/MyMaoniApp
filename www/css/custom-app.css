@@ -49,3 +49,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', end
     font-size: initial;
     margin: 0 auto;
 }
+.bar-header {
+    box-shadow: none;
+    height: 45px;
+}
