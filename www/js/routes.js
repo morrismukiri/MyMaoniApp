@@ -73,7 +73,7 @@ angular.module('starter.routes', [])
       })
       .state('polls', {
         url: '/polls',
-        templateUrl: 'templates/polls-container.html',
+        templateUrl: 'templates/polls/polls-container.html',
         abstract: true,
         controller: 'addPollCtrl'
       })
@@ -81,7 +81,7 @@ angular.module('starter.routes', [])
         url: '/addpoll',
         views: {
           'form': {
-            templateUrl: 'templates/add-poll.html',
+            templateUrl: 'templates/polls/add-poll.html',
 
           }
         }
@@ -90,7 +90,7 @@ angular.module('starter.routes', [])
         url: '/view/:pollId',
         views: {
           'form': {
-            templateUrl: 'templates/view-poll.html',
+            templateUrl: 'templates/polls/view-poll.html',
             controller: 'viewPollCtrl'
           }
         }
@@ -99,7 +99,7 @@ angular.module('starter.routes', [])
         url: '/addanswers',
         views: {
           'form': {
-            templateUrl: 'templates/add-poll-answers.html',
+            templateUrl: 'templates/polls/add-poll-answers.html',
           }
         }
       })
@@ -116,7 +116,7 @@ angular.module('starter.routes', [])
         url: '/result/:pollId',
         views: {
           'form': {
-            templateUrl: 'templates/poll-result.html',
+            templateUrl: 'templates/polls/poll-result.html',
             controller: 'resultCtrl'
           }
         }
@@ -136,7 +136,7 @@ angular.module('starter.routes', [])
         url: '/polls',
         views: {
           'tab2': {
-            templateUrl: 'templates/polls.html',
+            templateUrl: 'templates/polls/polls.html',
             controller: 'pollsCtrl'
           }
         }
