@@ -122,12 +122,21 @@ angular.module('starter.routes', [])
         }
       })
 
+      // .state('tabsController.home', {
+      //   url: '/home',
+      //   views: {
+      //     'tab1': {
+      //       templateUrl: 'templates/home.html',
+      //       controller: 'homeCtrl'
+      //     }
+      //   }
+      // })
       .state('tabsController.home', {
         url: '/home',
         views: {
           'tab1': {
-            templateUrl: 'templates/home.html',
-            controller: 'homeCtrl'
+            templateUrl: 'templates/surveys/list-surveys.html',
+            controller: 'surveyCtrl'
           }
         }
       })
