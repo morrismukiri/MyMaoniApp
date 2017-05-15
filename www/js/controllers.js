@@ -428,6 +428,37 @@ angular.module('starter.controllers', [])
       };
 
     }])
+  .controller('surveyCtrl', ['$scope', '$stateParams', 'API', '$http', 'AuthService',
+    function ($scope, $stateParams, API, $http, AuthService) {
+
+      $http.get(API.root + "surveys").then(
+        function (result) {
+          $scope.surveys = result.data.data;
+
+          console.log(result.data.message, $scope.surveys);
+        },
+        function (response) {
+          console.log(response);
+        }
+      )
+      $scope.doRefresh = function () {
+        $http.get(API.root + "surveys").then(
+          function (result) {
+            $scope.surveys = result.data.data;
+
+            console.log(result.data.message, $scope.surveys);
+          },
+          function (response) {
+            console.log(response);
+          }
+        )
+          .finally(function () {
+            // Stop the ion-refresher from spinning
+            $scope.$broadcast('scroll.refreshComplete');
+          });
+      };
+
+    }])
 
   .controller('communityDiscussionCtrl', ['$scope', '$stateParams', 'API', '$http', 'AuthService',
     function ($scope, $stateParams, API, $http, AuthService) {

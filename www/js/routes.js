@@ -190,6 +190,22 @@ angular.module('starter.routes', [])
           }
         }
       })
+      .state('surveys', {
+        url: '/surveys',
+        templateUrl: 'templates/surveys/survey-container.html',
+        abstract: true,
+        controller: 'surveyCtrl'
+      })
+      .state('surveys.list', {
+        url: '/list',
+        views: {
+          'form': {
+            templateUrl: 'templates/surveys/list-surveys.html',
+
+          }
+        }
+      }
+      )
     // $urlRouterProvider.otherwise('/page1/home')
     $urlRouterProvider.otherwise('/tabs/home');
 
