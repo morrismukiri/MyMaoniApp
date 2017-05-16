@@ -504,12 +504,20 @@ angular.module('starter.controllers', [])
       }, function (err) {
         console.log(err);
       });
-      $scope.addVote = function () {
-        var data = {
-          "pollId": $scope.poll.id,
-          "answerId": $scope.data.selection,
+      $scope.submitVote = function () {
+
+        var data =[];
+        console.log('selection:',JSON.stringify($scope.data));
+         $scope.survey.polls.forEach(function(element) {
+          data.push({
+          "pollId": element.id,
+          "answerId": $scope.data.selection[element.id],
+          "comment":$scope.data.comment[element.id]?$scope.data.comment[element.id]:null,
           "userId": AuthService.getUserId()
-        }
+          });
+        }, this);
+        console.log('data:',data);
+
         $http.post(API.root + 'vote', data).then(
           function (res) {
             console.log(res.data.data);
