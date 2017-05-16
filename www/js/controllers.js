@@ -492,5 +492,34 @@ angular.module('starter.controllers', [])
       };
 
     }])
+     .controller('surveyVoteCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate',
+    function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, $rootScope, $ionicScrollDelegate) {
+      $scope.poll = {};
+      $scope.data = {};
+      $scope.selection = null;
+      $http.get(API.root + "surveys/" + $stateParams.surveyId).then(function (res) {
+        $scope.survey = res.data.data;
+        $rootScope.$$phase || $rootScope.apply();
+        console.log($scope.survey);
+      }, function (err) {
+        console.log(err);
+      });
+      $scope.addVote = function () {
+        var data = {
+          "pollId": $scope.poll.id,
+          "answerId": $scope.data.selection,
+          "userId": AuthService.getUserId()
+        }
+        $http.post(API.root + 'vote', data).then(
+          function (res) {
+            console.log(res.data.data);
+            $state.go('tabsController.home', {}, { reload: true });
+          }, function (err) {
+            console.log("ERROR :", err);
+            console.log("Data :", data);
+          }
+        )
+      }
+    }])
   ;
 

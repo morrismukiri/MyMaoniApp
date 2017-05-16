@@ -1,0 +1,34 @@
+<ion-view title="Vote">
+  <ion-content class="has-header">
+    <h3 class="padding">{{survey.title}}</h3>
+     <div class="item">
+
+          <h2>Posted by {{survey.user.name}}</h2>
+          <p class="subdued"> <span am-time-ago="survey.created_at"></span></p>
+
+        </div>
+    <ion-list>
+      <div class="list card" ng-repeat="poll in survey.polls">
+        <!--<div class="item">-->
+        <h1 class="item item-divider item-text-wrap">{{poll.title}}</h1>
+
+        <div class="item">
+          <div class="item-body ">
+
+            <div class="list ">
+              <!--<div class="item item-divider">Your selectiion</div>-->
+              <label class="item item-radio" ng-repeat="answer in poll.answers">
+                <input type="radio" ng-model="data.selection" value="{{answer.id}}">
+                <i class="radio-icon ion-checkmark"></i>
+                <div class="item-content">{{answer.text}}</div>
+              </label>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--</div>-->
+    </ion-list>
+    <a class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="addVote()">Submit</a>
+  </ion-content>
+</ion-view>
