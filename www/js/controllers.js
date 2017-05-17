@@ -270,18 +270,18 @@ angular.module('starter.controllers', [])
         console.log(err);
       });
       $scope.addVote = function () {
-        var data = {
+        var data = [{
           "pollId": $scope.poll.id,
           "answerId": $scope.data.selection,
           "userId": AuthService.getUserId()
-        }
+        }];
         $http.post(API.root + 'vote', data).then(
           function (res) {
-            console.log(res.data.data);
+            console.log(JSON.stringify(res.data.data));
             $state.go('tabsController.home', {}, { reload: true });
           }, function (err) {
             console.log("ERROR :", err);
-            console.log("Data :", data);
+            console.log("Data :", JSON.stringify(data));
           }
         )
       }
