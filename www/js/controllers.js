@@ -273,6 +273,7 @@ angular.module('starter.controllers', [])
         var data = [{
           "pollId": $scope.poll.id,
           "answerId": $scope.data.selection,
+          "comment": $scope.data.comment? $scope.data.comment:null,
           "userId": AuthService.getUserId()
         }];
         $http.post(API.root + 'vote', data).then(
