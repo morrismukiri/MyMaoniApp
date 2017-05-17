@@ -529,5 +529,34 @@ angular.module('starter.controllers', [])
         )
       }
     }])
+     .controller('viewSurveyCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate',
+    function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, $rootScope, $ionicScrollDelegate) {
+      $scope.survey = {};
+      $http.get(API.root + "surveys/" + $stateParams.surveyId).then(function (res) {
+        $scope.survey = res.data.data;
+        $rootScope.$$phase || $rootScope.apply();
+        console.log($scope.survey);
+      }, function (err) {
+        console.log(err);
+      })
+      $scope.addComment = function (message) {
+        var data = {
+          "surveyId": $scope.survey.id,
+          "comment": $scope.message,
+          "userId": AuthService.getUserId()
+        }
+        $http.post(API.root + 'opinions', data).then(
+          function (res) {
+            console.log(res.data.data);
+            $scope.survey.opinions.push(res.data.data);
+            $scope.message = "";
+            $ionicScrollDelegate.scrollBottom(true);
+          }, function (err) {
+            console.log("ERROR :", err);
+            console.log("Data :", data);
+          }
+        )
+      }
+    }])
   ;
 
