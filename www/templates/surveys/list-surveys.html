@@ -13,10 +13,10 @@
         </div>
         <div class="item item-body">
          <a ui-sref="surveys.viewsurvey({surveyId: survey.id})" class="link-unstyled">  {{survey.description}} </a>
-          <p>
+          <!--<p>
             <a class="subdued" ui-sref="surveys.viewsurvey({surveyId: survey.id})">{{survey.votes.length}} votes</a>
             <a class="subdued" ui-sref="surveys.viewsurvey({surveyId: survey.id})">{{survey.opinions.length}}  Comments</a>
-          </p>
+          </p>-->
         </div>
         <div class="item tabs tabs-default tabs-icon-left">
           <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5" ui-sref="surveys.vote({surveyId: survey.id})"><i class="icon ion-thumbsup"></i> vote </a>
