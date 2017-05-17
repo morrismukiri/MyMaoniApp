@@ -18,7 +18,7 @@
             <div class="list ">
               <!--<div class="item item-divider">Your selectiion</div>-->
               <label class="item item-radio" ng-repeat="answer in poll.answers">
-                <input type="radio" ng-model="data.selection[poll.id]" name="data.selection[]" value="{{answer.id}}">
+                <input type="radio" ng-model="data.selection[poll.id]" value="{{answer.id}}">
                 <i class="radio-icon ion-checkmark"></i>
                 <div class="item-content">{{answer.text}}</div>
               </label>

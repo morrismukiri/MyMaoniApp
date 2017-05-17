@@ -512,11 +512,11 @@ angular.module('starter.controllers', [])
           data.push({
           "pollId": element.id,
           "answerId": $scope.data.selection[element.id],
-          "comment":$scope.data.comment[element.id]?$scope.data.comment[element.id]:null,
+          "comment": $scope.data.comment && $scope.data.comment.indexOf(element.id) >-1?$scope.data.comment[element.id]:null,
           "userId": AuthService.getUserId()
           });
         }, this);
-        console.log('data:',data);
+        console.log('data:', JSON.stringify(data));
 
         $http.post(API.root + 'vote', data).then(
           function (res) {
