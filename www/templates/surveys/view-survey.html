@@ -2,7 +2,7 @@
   <ion-content padding="true" class="has-header">
     <h2>{{survey.title}}</h2>
     <ion-list>
-      <div class="list card stable-bg">
+      <div class="list card ">
         <div class="item">
           <!--<img src="img/arya.jpg">-->
           <h2>Posted by {{survey.user.name}}</h2>
@@ -10,47 +10,31 @@
 
         </div>
         <div class="item item-body">
-          <p>Category: {{survey.category.name}}</p>
           {{survey.description}}
           <!--<p>
             <a class="subdued">{{poll.answers.length}} votes</a>
             <a class="subdued">{{poll.opinions.length}}  Comments</a>
           </p>-->
         </div>
-        <a class="button button-outline button-assertive button-full" ui-sref="surveys.vote({surveyId: survey.id})">
-          <i class="icon ion-thumbsup"></i> vote
-        </a>
-         <a class="button button-outline button-assertive button-full" ui-sref="surveys.result({surveyId: survey.id})">
-          <i class="icon ion-pie-graph"></i> View Results
-        </a>
+
+
+
         <!--<div class="item tabs tabs-assertive tabs-outline tabs-icon-left">
           <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"><i class="icon ion-thumbsup"></i> vote </a>-->
         <!--<a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"> <i class="icon ion-chatbox"></i> Comment </a>-->
         <!--<a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"> <i class="icon ion-share"></i> Share </a>-->
         <!--</div>-->
       </div>
-      <h4 class="border-top">Comments</h4>
-      <div class="list">
-
-        <a class="item item-avatar" ng-repeat="comment in survey.opinions">
-          <img src="img/material1.jpg">
-          <h2>{{comment.user.name}}</h2>
-          <p>Posted <span am-time-ago="comment.created_at"></p>
-          <span class=" item-body">{{comment.comment}}</span>
+      <a class="button button-outline button-assertive button-full" ui-sref="surveys.vote({surveyId: survey.id})">
+          <i class="icon ion-thumbsup"></i> Fill Survey
         </a>
-      </div>
+      <div class="list card list-inset">
+          <div class="item item-divider">Polls</div>
+
+            <a class="item item-text-wrap" ng-repeat="poll in survey.polls" ui-sref="polls.viewPoll({pollId: poll.id})"> {{poll.title}} </a>
+        </div>
+
 
     </ion-list>
   </ion-content>
-  <form id="footer-input" ng-submit="addComment(message)">
-    <ion-footer-bar keyboard-attach class="item-input-inset">
-      <label class="item-input-wrapper">
-
-            <input type="text" placeholder="Comment" ng-model="message">
-            </label>
-      <a class="button button-positive" ng-click="addComment(message)">
-        <i class="icon ion-android-send"></i>
-      </a>
-    </ion-footer-bar>
-  </form>
 </ion-view>

@@ -539,24 +539,6 @@ angular.module('starter.controllers', [])
       }, function (err) {
         console.log(err);
       })
-      $scope.addComment = function (message) {
-        var data = {
-          "surveyId": $scope.survey.id,
-          "comment": $scope.message,
-          "userId": AuthService.getUserId()
-        }
-        $http.post(API.root + 'opinions', data).then(
-          function (res) {
-            console.log(res.data.data);
-            $scope.survey.opinions.push(res.data.data);
-            $scope.message = "";
-            $ionicScrollDelegate.scrollBottom(true);
-          }, function (err) {
-            console.log("ERROR :", err);
-            console.log("Data :", data);
-          }
-        )
-      }
     }])
   ;
 
