@@ -273,7 +273,7 @@ angular.module('starter.controllers', [])
         var data = [{
           "pollId": $scope.poll.id,
           "answerId": $scope.data.selection,
-          "comment": $scope.data.comment? $scope.data.comment:null,
+          "comment": $scope.data.comment ? $scope.data.comment : null,
           "userId": AuthService.getUserId()
         }];
         $http.post(API.root + 'vote', data).then(
@@ -493,8 +493,8 @@ angular.module('starter.controllers', [])
       };
 
     }])
-     .controller('surveyVoteCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate',
-    function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, $rootScope, $ionicScrollDelegate) {
+  .controller('surveyVoteCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate', '$ionicPopup',
+    function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, $rootScope, $ionicScrollDelegate, $ionicPopup) {
       $scope.poll = {};
       $scope.data = {};
       $scope.selection = null;
@@ -507,15 +507,23 @@ angular.module('starter.controllers', [])
       });
       $scope.submitVote = function () {
 
-        var data =[];
-        console.log('selection:',JSON.stringify($scope.data));
-         $scope.survey.polls.forEach(function(element) {
-          data.push({
-          "pollId": element.id,
-          "answerId": $scope.data.selection[element.id],
-          "comment": $scope.data.comment && $scope.data.comment.indexOf(element.id) >-1?$scope.data.comment[element.id]:null,
-          "userId": AuthService.getUserId()
-          });
+        var data = [];
+        console.log('selection:', JSON.stringify($scope.data));
+        $scope.survey.polls.forEach(function (element) {
+          try {
+            data.push({
+              "pollId": element.id,
+              "answerId": $scope.data.selection[element.id],
+              "comment": $scope.data.comment && $scope.data.comment.indexOf(element.id) > -1 ? $scope.data.comment[element.id] : null,
+              "userId": AuthService.getUserId()
+            });
+          } catch (e) {
+            var alertPopup = $ionicPopup.alert({
+              title: 'You Missed some polls ',
+              template: 'Please answer all the polls'
+            });
+            return false;
+          }
         }, this);
         console.log('data:', JSON.stringify(data));
 
@@ -530,7 +538,7 @@ angular.module('starter.controllers', [])
         )
       }
     }])
-     .controller('viewSurveyCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate',
+  .controller('viewSurveyCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate',
     function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, $rootScope, $ionicScrollDelegate) {
       $scope.survey = {};
       $http.get(API.root + "surveys/" + $stateParams.surveyId).then(function (res) {
