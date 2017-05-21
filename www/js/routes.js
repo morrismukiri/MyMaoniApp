@@ -155,8 +155,10 @@ angular.module('starter.routes', [])
         url: '/talk',
         views: {
           'tab3': {
-            templateUrl: 'templates/communityDiscussion.html',
-            controller: 'communityDiscussionCtrl'
+            // templateUrl: 'templates/communityDiscussion.html',
+            // controller: 'communityDiscussionCtrl'
+            templateUrl: 'templates/contribution.html',
+            controller: 'contributionCtrl'
           }
         }
       })
