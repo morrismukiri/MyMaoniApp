@@ -493,8 +493,8 @@ angular.module('starter.controllers', [])
       };
 
     }])
-  .controller('surveyVoteCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate', '$ionicPopup',
-    function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, $rootScope, $ionicScrollDelegate, $ionicPopup) {
+  .controller('surveyVoteCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate', '$ionicPopup', 'ionicToast',
+    function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, $rootScope, $ionicScrollDelegate, $ionicPopup, ionicToast) {
       $scope.poll = {};
       $scope.data = {};
       $scope.selection = null;
@@ -505,6 +505,9 @@ angular.module('starter.controllers', [])
       }, function (err) {
         console.log(err);
       });
+      $scope.hideToast = function () {
+        ionicToast.hide();
+      };
       $scope.submitVote = function () {
 
         var data = [];
@@ -529,9 +532,11 @@ angular.module('starter.controllers', [])
             function (res) {
               console.log(res.data.data);
               $state.go('tabsController.home', {}, { reload: true });
+              ionicToast.show('Your contribution has been saved. Thanks!', 'bottom', false, 3000);
             }, function (err) {
               console.log("ERROR :", err);
               console.log("Data :", data);
+              ionicToast.show('Sorry! Something went wrong. please try again', 'bottom', false, 3000);
             }
           )
         } else {
