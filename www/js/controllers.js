@@ -509,33 +509,38 @@ angular.module('starter.controllers', [])
 
         var data = [];
         console.log('selection:', JSON.stringify($scope.data));
+        var completed = true;
         $scope.survey.polls.forEach(function (element) {
-          try {
+          // try {
+          if ($scope.data.selection && $scope.data.selection[element.id]) {
             data.push({
               "pollId": element.id,
               "answerId": $scope.data.selection[element.id],
-              "comment": $scope.data.comment && $scope.data.comment.indexOf(element.id) > -1 ? $scope.data.comment[element.id] : null,
+              "comment": $scope.data.comment && $scope.data.comment[element.id] ? $scope.data.comment[element.id] : null,
               "userId": AuthService.getUserId()
             });
-          } catch (e) {
-            var alertPopup = $ionicPopup.alert({
-              title: 'You Missed some polls ',
-              template: 'Please answer all the polls'
-            });
-            return false;
+          } else {
+            completed = false;
           }
         }, this);
         console.log('data:', JSON.stringify(data));
-
-        $http.post(API.root + 'vote', data).then(
-          function (res) {
-            console.log(res.data.data);
-            $state.go('tabsController.home', {}, { reload: true });
-          }, function (err) {
-            console.log("ERROR :", err);
-            console.log("Data :", data);
-          }
-        )
+        if (completed) {
+          $http.post(API.root + 'vote', data).then(
+            function (res) {
+              console.log(res.data.data);
+              $state.go('tabsController.home', {}, { reload: true });
+            }, function (err) {
+              console.log("ERROR :", err);
+              console.log("Data :", data);
+            }
+          )
+        } else {
+          var alertPopup = $ionicPopup.alert({
+            title: 'You Missed some polls ',
+            template: 'Please answer all the polls'
+          });
+          return false;
+        }
       }
     }])
   .controller('viewSurveyCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate',
