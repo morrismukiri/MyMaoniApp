@@ -343,9 +343,17 @@ angular.module('starter.controllers', [])
       "phone": "",
       "gender": "",
       "address": "",
+      "county": "",
+      "constituency": "",
+      "ward": "",
       "dob": "",
       "password": ""
     };
+    wardsData = [];
+    $http.get('js/wards.json').then(function (data) {
+      wardsData = data.data;
+      console.log("wards data:", wardsData);
+    });
 
     $scope.send_verification = function (phone) {
       var data = {
