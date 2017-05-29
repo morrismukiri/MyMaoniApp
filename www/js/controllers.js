@@ -581,23 +581,24 @@ angular.module('starter.controllers', [])
   .controller('contributionCtrl', ['$scope', '$stateParams', 'API', '$http', 'AuthService',
     function ($scope, $stateParams, API, $http, AuthService) {
 
-      $http.get(API.root + "usercontribution/" + AuthService.getUserId()).then(
+      $http.get(API.root + "usercontributedsurveys/" + AuthService.getUserId()).then(
         function (result) {
-          $scope.opinions = result.data.data.opinions
-          $scope.votes = result.data.data.votes;
+           $scope.surveys = result.data.data;
+          // $scope.opinions = result.data.data.opinions
+          // $scope.votes = result.data.data.votes;
 
-          console.log(result.data.message, $scope.polls);
+          console.log('User contributed to these surveys:', result.data.message, $scope.surveys);
         },
         function (response) {
           console.log(response);
         }
       )
       $scope.doRefresh = function () {
-        $http.get(API.root + "usercontribution/" + AuthService.getUserId()).then(
+        $http.get(API.root + "usercontributedsurveys/" + AuthService.getUserId()).then(
           function (result) {
-            $scope.polls = result.data.data;
+            $scope.surveys = result.data.data;
 
-            console.log(result.data.message, $scope.polls);
+            console.log(result.data.message, $scope.surveys);
           },
           function (response) {
             console.log(response);
