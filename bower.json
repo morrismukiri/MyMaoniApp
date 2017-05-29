@@ -11,7 +11,8 @@
     "ionic-datepicker": "~1.2.1",
     "angular-jwt": "~0.1.9",
     "angular-chart.js": "~1.1.1",
-    "ionic-toast": "~0.4.1"
+    "ionic-toast": "~0.4.1",
+    "lodash": "~4.17.4"
   },
   "resolutions": {
     "angular": "1.4.3",
