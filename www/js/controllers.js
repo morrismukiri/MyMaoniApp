@@ -353,6 +353,10 @@ angular.module('starter.controllers', [])
     $http.get('js/wards.json').then(function (data) {
       wardsData = data.data;
       console.log("wards data:", wardsData);
+      $scope.counties = _(wardsData).map("County").uniq().value();
+      $scope.constituencies = _(wardsData).map("Constituency").uniq().value();
+      $scope.wards = _(wardsData).filter({ County: "THARAKA-NITHI", Constituency: "CHUKA/IGAMBANG'OMBE" }).map("WardName").value();
+      console.log($scope.wards);
     });
 
     $scope.send_verification = function (phone) {
