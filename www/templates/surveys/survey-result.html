@@ -1,0 +1,36 @@
+<ion-view title="Survey Results">
+  <ion-content padding="true" class="has-header">
+
+  <h3 class="title">{{survey.title}}</h3>
+
+    <h3></h3>
+
+    <ion-list class="list">
+      <div class="item item-devider card list" ng-repeat="poll in survey.polls">
+          <h3 class="item ">{{poll.title}}</h3>
+          <div class="item item-text-wrap">
+            <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-legend="true" chart-options="options"
+              chart-colors="colors">
+            </canvas>
+          </div>
+          <h4 class=" item border-top">Votes</h4>
+          <div class="list">
+            <div class="item " ng-repeat="result in voteResult" style="vertical-align:middle">
+              <span class="h4"> {{ result.answer.text}}</span>
+              <div class="right numberCircle"><span class="assertive">{{ result.totalVotes}}</span></div>
+            </div>
+          </div>
+        <h4 class="border-top">Comments</h4>
+        <div class="list">
+
+          <a class="item item-avatar" ng-repeat="comment in poll.opinions">
+          <img src="img/material1.jpg">
+          <h2>{{comment.user.name}}</h2>
+          <p>Posted <span am-time-ago="comment.created_at"></p>
+          <span class=" item-body">{{comment.comment}}</span>
+        </a>
+        </div>
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-view>

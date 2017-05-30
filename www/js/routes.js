@@ -235,7 +235,7 @@ angular.module('starter.routes', [])
         }
       })
        .state('surveys.result', {
-        url: '/result/:surveyd',
+        url: '/result/:surveyId',
         views: {
           'form': {
             templateUrl: 'templates/surveys/survey-result.html',

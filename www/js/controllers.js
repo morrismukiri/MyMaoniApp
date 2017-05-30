@@ -611,5 +611,43 @@ angular.module('starter.controllers', [])
       };
 
     }])
+
+     .controller('SurveyResultCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate',
+    function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, $rootScope, $ionicScrollDelegate) {
+      $scope.labels = [];
+      $scope.data = [];
+      $scope.colors = ['#387ef5', '#33cd5f', '#ef473a', '#ffc900', '#4D5360', '#11c1f3', '#886aea'];
+      $scope.options = { legend: { display: true, position: 'bottom', } };
+      $scope.poll = {};
+      // ChartJsProvider.setOptions({ colors : [ '#387ef5', '#11c1f3', '#33cd5f', '#ffc900', '#ef473a', '#886aea', '#4D5360'] });
+      $http.get(API.root + "surveys/result/" + $stateParams.surveyId).then(function (res) {
+        $scope.survey = res.data.data;
+        $rootScope.$$phase || $rootScope.apply();
+        console.log($scope.survey);
+      }, function (err) {
+        console.log(err);
+      })
+      $scope.voteResult = null;
+      // $http.get(API.root + "surveys/result/" + $stateParams.surveyId).then(function (res) {
+      //   $scope.voteResult = res.data.data;
+
+      //   var labels = [];
+      //   var dataSet = [];
+      //   $scope.answersFromVotes = [];
+      //   for (var i = 0; i < $scope.voteResult.length; i++) {
+      //     $scope.answersFromVotes.push($scope.voteResult[i].answer.text);
+      //     $scope.labels.push($scope.voteResult[i].answer.text);
+      //     $scope.data.push($scope.voteResult[i].totalVotes);
+      //   }
+      //   console.log("Answers from Votes: ", $scope.answersFromVotes);
+      //   console.log('labels: ', labels);
+      //   console.log('dataSet: ', dataSet);
+      //   // $rootScope.$$phase || $rootScope.apply();
+      //   // console.log(JSON.stringify($scope.voteResult), $scope.voteResult);
+      // }, function (err) {
+      //   console.log(err);
+      // });
+
+    }])
   ;
 
