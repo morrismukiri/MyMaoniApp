@@ -117,7 +117,7 @@ angular.module('starter.routes', [])
         views: {
           'form': {
             templateUrl: 'templates/polls/poll-result.html',
-            controller: 'resultCtrl'
+            controller: 'PollResultCtrl'
           }
         }
       })
