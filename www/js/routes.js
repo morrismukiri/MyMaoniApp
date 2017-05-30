@@ -234,6 +234,15 @@ angular.module('starter.routes', [])
           }
         }
       })
+       .state('surveys.result', {
+        url: '/result/:surveyd',
+        views: {
+          'form': {
+            templateUrl: 'templates/surveys/survey-result.html',
+            controller: 'SurveyResultCtrl'
+          }
+        }
+      })
     // $urlRouterProvider.otherwise('/page1/home')
     $urlRouterProvider.otherwise('/tabs/home');
 
