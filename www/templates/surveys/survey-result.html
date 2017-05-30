@@ -9,13 +9,13 @@
       <div class="item item-devider card list" ng-repeat="poll in survey.polls">
           <h3 class="item ">{{poll.title}}</h3>
           <div class="item item-text-wrap">
-            <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-legend="true" chart-options="options"
+            <canvas class="chart chart-pie" chart-data="poll.data" chart-labels="poll.labels" chart-legend="true" chart-options="options"
               chart-colors="colors">
             </canvas>
           </div>
           <h4 class=" item border-top">Votes</h4>
           <div class="list">
-            <div class="item " ng-repeat="result in poll.result" style="vertical-align:middle">
+            <div class="item " ng-repeat="result in poll.results" style="vertical-align:middle">
               <span class="h4"> {{ result.answer.text}}</span>
               <div class="right numberCircle"><span class="assertive">{{ result.totalVotes}}</span></div>
             </div>

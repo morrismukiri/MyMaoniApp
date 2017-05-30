@@ -627,12 +627,22 @@ angular.module('starter.controllers', [])
         console.log($scope.survey);
 
         $scope.survey.polls.forEach(function (poll, i) {
-          poll.result = _(poll.votes)
+          poll.results = _(poll.votes)
             .groupBy('answerId')
             .map(function (items, answerId) {
               return { answerId: answerId, totalVotes: items.length, answer: items[0].answer };
             }).value();
+          poll.data = [];
+          poll.labels = [];
+          poll.results.forEach(function (result, i) {
+
+            poll.labels.push(result.answer.text);
+            poll.data.push(result.totalVotes);
+
+          })
         });
+
+
         console.log('voteResult :', $scope.survey);
 
       }, function (err) {
