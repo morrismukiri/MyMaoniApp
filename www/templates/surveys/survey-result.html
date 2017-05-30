@@ -15,7 +15,7 @@
           </div>
           <h4 class=" item border-top">Votes</h4>
           <div class="list">
-            <div class="item " ng-repeat="result in voteResult" style="vertical-align:middle">
+            <div class="item " ng-repeat="result in poll.result" style="vertical-align:middle">
               <span class="h4"> {{ result.answer.text}}</span>
               <div class="right numberCircle"><span class="assertive">{{ result.totalVotes}}</span></div>
             </div>

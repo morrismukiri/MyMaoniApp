@@ -359,10 +359,10 @@ angular.module('starter.controllers', [])
       $scope.counties = _(wardsData).map("County").uniq().value();
     });
     $scope.filterConstituency = function () {
-      $scope.constituencies = _(wardsData).filter({ County: $scope.data.county}).map("Constituency").uniq().value();
+      $scope.constituencies = _(wardsData).filter({ County: $scope.data.county }).map("Constituency").uniq().value();
     }
     $scope.filterWard = function () {
-      $scope.wards = _(wardsData).filter({ County: $scope.data.county, Constituency:$scope.data.constituency}).map("WardName").uniq().value();
+      $scope.wards = _(wardsData).filter({ County: $scope.data.county, Constituency: $scope.data.constituency }).map("WardName").uniq().value();
     }
 
     $scope.send_verification = function (phone) {
@@ -583,7 +583,7 @@ angular.module('starter.controllers', [])
 
       $http.get(API.root + "usercontributedsurveys/" + AuthService.getUserId()).then(
         function (result) {
-           $scope.surveys = result.data.data;
+          $scope.surveys = result.data.data;
           // $scope.opinions = result.data.data.opinions
           // $scope.votes = result.data.data.votes;
 
@@ -612,22 +612,33 @@ angular.module('starter.controllers', [])
 
     }])
 
-     .controller('SurveyResultCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate',
+  .controller('SurveyResultCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate',
     function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, $rootScope, $ionicScrollDelegate) {
       $scope.labels = [];
       $scope.data = [];
       $scope.colors = ['#387ef5', '#33cd5f', '#ef473a', '#ffc900', '#4D5360', '#11c1f3', '#886aea'];
       $scope.options = { legend: { display: true, position: 'bottom', } };
       $scope.poll = {};
+      $scope.voteResult = [];
       // ChartJsProvider.setOptions({ colors : [ '#387ef5', '#11c1f3', '#33cd5f', '#ffc900', '#ef473a', '#886aea', '#4D5360'] });
       $http.get(API.root + "surveys/result/" + $stateParams.surveyId).then(function (res) {
         $scope.survey = res.data.data;
         $rootScope.$$phase || $rootScope.apply();
         console.log($scope.survey);
+
+        $scope.survey.polls.forEach(function (poll, i) {
+          poll.result = _(poll.votes)
+            .groupBy('answerId')
+            .map(function (items, answerId) {
+              return { answerId: answerId, totalVotes: items.length, answer: items[0].answer };
+            }).value();
+        });
+        console.log('voteResult :', $scope.survey);
+
       }, function (err) {
         console.log(err);
       })
-      $scope.voteResult = null;
+
       // $http.get(API.root + "surveys/result/" + $stateParams.surveyId).then(function (res) {
       //   $scope.voteResult = res.data.data;
 
