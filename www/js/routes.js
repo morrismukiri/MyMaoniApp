@@ -146,7 +146,7 @@ angular.module('starter.routes', [])
       .state('tabsController.communityDiscussion', {
         url: '/talk',
         views: {
-          'tab3': {
+          'tab2': {
             // templateUrl: 'templates/communityDiscussion.html',
             // controller: 'communityDiscussionCtrl'
             templateUrl: 'templates/contribution.html',
@@ -157,7 +157,7 @@ angular.module('starter.routes', [])
       .state('tabsController.profile', {
         url: '/profile',
         views: {
-          'tab2': {
+          'tab3': {
             templateUrl: 'templates/profile-detail.html',
             controller: 'ProfileCtrl'
           }
