@@ -75,7 +75,7 @@ angular.module('starter.controllers', [])
   })
   .controller('ProfileCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, API, $http,   $state, AuthService) {
 
-    $scope.edit = false;
+    $scope.disableEdit = true;
 
     $http.get(API.root + "userdetail/"+ AuthService.getUserId(),).then(
       function (result) {
@@ -91,6 +91,10 @@ angular.module('starter.controllers', [])
 
 
 
+      $scope.toggleEdit = function (){
+        $scope.disableEdit = !$scope.disableEdit;
+        console.log('$scope.disableEdit:',$scope.disableEdit)
+      }
 
     // Set Ink
     ionicMaterialInk.displayEffect();

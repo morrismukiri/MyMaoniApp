@@ -1,39 +1,51 @@
 <ion-view view-title="Account">
 
-	<!-- Buttons Top Bar Right -->
-	<ion-nav-buttons side="secondary">
-		<button class="button button-icon button-clear button-light ion-android-cancel" ng-click="logout()"></button>
-	</ion-nav-buttons>
+  <!-- Buttons Top Bar Right -->
+  <ion-nav-buttons side="secondary">
+    <button class="button button-icon button-clear button-light ion-android-cancel" ng-click="logout()"></button>
+  </ion-nav-buttons>
 
-	<!-- Content -->
-	<ion-content class="stable-bg">
-	    <div class="list card profile-top text-center">
-	      	<div class="item item-text-wrap">
-	        	<button class="button button-icon ion-edit calm"></button>
-	        	<!--<img src="img/female-placeholder.png" class="avatar-profile" alt="">-->
-	        	<h2 class="font-thin"> {{profile.name}}</h2>
-	        	<p>{{profile.phone}}</p>
-        		<p class="text-muted">Kenya</p>
-	      	</div>
+  <!-- Content -->
+  <ion-content class="stable-bg">
 
-	      	<!-- Divider Bar -->
-			<div class="item item-divider no-padding-top profil-divider">
-			    General
-			</div>
+    <div class="list card profile-top text-center">
 
-			<div class="list">
-		      	<label class="item item-input">
-		        	<i class="icon ion-ios-email-outline placeholder-icon"></i>
-		        	<input type="text" disabled="disabled" placeholder="adresse@mail.com" ng-model="profile.email">
+      <div class="item item-text-wrap">
+        <button class=" button  ion-edit balanced pull-right" ng-click="toggleEdit()"></button>
+        <!--<img src="img/female-placeholder.png" class="avatar-profile" alt="">-->
+        <h2 class="font-thin"> {{profile.name}}</h2>
+
+        <label class="item item-input" ng-hide="{{disableEdit}}">
+		        	<i class="icon ion-ios-telephone-outline placeholder-icon"></i>
+		        	<input type="tel" ng-disabled="{{disableEdit}}"  ng-model="profile.name">
 		      	</label>
-		    </div>
 
-		    <!-- Divider Bar -->
-			<div class="item item-divider no-padding-top profil-divider">
-			    Paramètres
-			</div>
+        <label class="item item-input">
+		        	<i class="icon ion-ios-telephone-outline placeholder-icon"></i>
+		        	<input type="tel" ng-disabled="{{disableEdit}}"  ng-model="profile.phone">
+		      	</label>
+        <label class="item item-input">
+		        	<i class="icon ion-ios-email-outline placeholder-icon"></i>
+		        	<input type="text" ng-disabled="{{disableEdit}}" placeholder="adresse@mail.com" ng-model="profile.email">
+		      	</label>
+        <p class="text-muted">Kenya</p>
+      </div>
 
-			<ion-toggle class="setting" ng-model="airplaneMode" toggle-class="toggle-calm">Notifications</ion-toggle>
-	    </div>
-	  </ion-content>
+      <!-- Divider Bar -->
+      <div class="item item-divider no-padding-top profil-divider">
+        General
+      </div>
+
+      <div class="list">
+
+      </div>
+
+      <!-- Divider Bar -->
+      <div class="item item-divider no-padding-top profil-divider">
+        Parameters
+      </div>
+
+      <ion-toggle class="setting" ng-model="airplaneMode" toggle-class="toggle-calm">Notifications</ion-toggle>
+    </div>
+  </ion-content>
 </ion-view>
