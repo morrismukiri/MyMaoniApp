@@ -57,21 +57,22 @@
       <ion-content ng-controller="menuCtrl" padding="false" class="side-menu-left has-header ">
         <ion-list id="menu-list1" data-componentid="list1">
           <ion-item class="item-thumbnail-left assertive" id="menu-list-item7" data-componentid="list-item7">
-            <img src="img/logo.png">
+            <img src="img/person.png">
             <h2assertive>My Maoni
-              <p>user</p>
+              <p><a class="royal" ui-sref="tabsController.profile">{{user.name}}</a> </p>
+              <p><a href="" ng-click="logout()" class="assertive">Log out</a></p>
             </h2assertive>
           </ion-item>
           <ion-item class="item-icon-left assertive" id="menu-list-item4" ui-sref="tabsController.home" menu-close="" data-componentid="list-item4">
             <i class="icon ion-home"></i>Home</ion-item>
-          <!--<ion-item class="item-icon-left assertive" id="menu-list-item5" ui-sref="tabsController.polls" menu-close="" data-componentid="list-item5">
-            <i class="icon ion-clipboard"></i>My Polls</ion-item>-->
+          <ion-item class="item-icon-left assertive" id="menu-list-item5" ui-sref="tabsController.polls" menu-close="" data-componentid="list-item5">
+            <i class="icon ion-clipboard"></i>My Polls</ion-item>
           <ion-item class="item-icon-left assertive" id="menu-list-item6" ui-sref="tabsController.communityDiscussion" menu-close=""
             data-componentid="list-item6">
             <i class="icon ion-chatboxes"></i>My Contribution</ion-item>
         </ion-list>
-        <ion-item class="item-icon-left assertive" id="menu-list-item7" ng-click="logout()" menu-close="" data-componentid="list-item7">
-          <i class="icon ion-log-out"></i>Logout</ion-item>
+        <ion-item class="item-icon-left assertive" id="menu-list-item7"  menu-close="" data-componentid="list-item7">
+          <i class="icon ion-person"></i>Profile</ion-item>
         </ion-list>
       </ion-content>
     </ion-side-menu>
