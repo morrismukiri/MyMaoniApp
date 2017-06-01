@@ -15,18 +15,18 @@
         <!--<img src="img/female-placeholder.png" class="avatar-profile" alt="">-->
         <h2 class="font-thin"> {{profile.name}}</h2>
 
-        <label class="item item-input" ng-hide="{{disableEdit}}">
-		        	<i class="icon ion-ios-telephone-outline placeholder-icon"></i>
-		        	<input type="tel" ng-disabled="{{disableEdit}}"  ng-model="profile.name">
+        <label class="item item-input" ng-hide="disableEdit">
+		        	<i class="icon ion-person placeholder-icon"></i>
+		        	<input type="tel" ng-disabled="disableEdit"  ng-model="profile.name">
 		      	</label>
 
         <label class="item item-input">
 		        	<i class="icon ion-ios-telephone-outline placeholder-icon"></i>
-		        	<input type="tel" ng-disabled="{{disableEdit}}"  ng-model="profile.phone">
+		        	<input type="tel" ng-disabled="disableEdit"  ng-model="profile.phone">
 		      	</label>
         <label class="item item-input">
 		        	<i class="icon ion-ios-email-outline placeholder-icon"></i>
-		        	<input type="text" ng-disabled="{{disableEdit}}" placeholder="adresse@mail.com" ng-model="profile.email">
+		        	<input type="text" ng-disabled="disableEdit" placeholder="adresse@mail.com" ng-model="profile.email">
 		      	</label>
         <p class="text-muted">Kenya</p>
       </div>
