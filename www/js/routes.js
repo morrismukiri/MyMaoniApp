@@ -62,15 +62,7 @@ angular.module('starter.routes', [])
         }
       })
 
-      .state('app.profile', {
-        url: '/profile/:profileId',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/profile-detail.html',
-            controller: 'ProfileCtrl'
-          }
-        }
-      })
+
       .state('polls', {
         url: '/polls',
         templateUrl: 'templates/polls/polls-container.html',
@@ -162,7 +154,15 @@ angular.module('starter.routes', [])
           }
         }
       })
-
+      .state('tabsController.profile', {
+        url: '/profile',
+        views: {
+          'tab2': {
+            templateUrl: 'templates/profile-detail.html',
+            controller: 'ProfileCtrl'
+          }
+        }
+      })
       .state('tabsController', {
         url: '/tabs',
         templateUrl: 'templates/tabsController.html',
