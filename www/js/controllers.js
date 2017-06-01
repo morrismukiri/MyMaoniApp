@@ -73,27 +73,24 @@ angular.module('starter.controllers', [])
       $scope.username = name;
     };
   })
-  .controller('ProfileCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Profiles) {
-    // Set Header
+  .controller('ProfileCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, API, $http,   $state, AuthService) {
 
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.isExpanded = false;
-    $scope.$parent.setExpanded(false);
-    $scope.$parent.setHeaderFab(false);
-    $scope.profile = Profiles.get($stateParams.profileId);
-    // Set Motion
-    $timeout(function () {
-      ionicMaterialMotion.slideUp({
-        selector: '.slide-up'
-      });
-    }, 300);
+    $scope.edit = false;
 
-    $timeout(function () {
-      ionicMaterialMotion.fadeSlideInRight({
-        startVelocity: 3000
-      });
-    }, 700);
+    $http.get(API.root + "userdetail/"+ AuthService.getUserId(),).then(
+      function (result) {
+        $scope.profile = result.data.data;
+
+        console.log(result.data.message, $scope.polls);
+      },
+      function (response) {
+        console.log(response);
+      }
+    )
+
+
+
+
 
     // Set Ink
     ionicMaterialInk.displayEffect();

@@ -1,34 +1,39 @@
-<ion-view view-title="Profile">
-  <ion-content>
+<ion-view view-title="Account">
 
-<div class="list card">
+	<!-- Buttons Top Bar Right -->
+	<ion-nav-buttons side="secondary">
+		<button class="button button-icon button-clear button-light ion-android-cancel" ng-click="logout()"></button>
+	</ion-nav-buttons>
 
-  <div class="item item-avatar">
-    <img src="{{profile.face}}">
-    <h2>{{profile.name}}</h2>
-    <p>{{profile.deseg}}</p>
-  </div>
+	<!-- Content -->
+	<ion-content class="stable-bg">
+	    <div class="list card profile-top text-center">
+	      	<div class="item item-text-wrap">
+	        	<button class="button button-icon ion-edit calm"></button>
+	        	<!--<img src="img/female-placeholder.png" class="avatar-profile" alt="">-->
+	        	<h2 class="font-thin"> {{profile.name}}</h2>
+	        	<p>{{profile.phone}}</p>
+        		<p class="text-muted">Kenya</p>
+	      	</div>
 
-  <div class="item item-body">
-    <img class="full-image" src="{{profile.face}}">
-    <p>
-      This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-      the content is from a card-body consisting of an image and paragraph text. The footer
-      consists of tabs, icons aligned left, within the card-footer.
-    </p>
-    <p>
-      <a href="#" class="subdued">1 Like</a>
-      <a href="#" class="subdued">5 Comments</a>
-    </p>
-  </div>
+	      	<!-- Divider Bar -->
+			<div class="item item-divider no-padding-top profil-divider">
+			    General
+			</div>
 
-  <div class="item tabs tabs-secondary tabs-icon-left">
-    <a class="tab-item" href="#"> <i class="icon ion-thumbsup"></i> Like </a>
-	<a class="tab-item" href="#"> <i class="icon ion-chatbox"></i> Comment</a>
-    <a class="tab-item" href="#"> <i class="icon ion-share"></i>Share</a>
-  </div>
+			<div class="list">
+		      	<label class="item item-input">
+		        	<i class="icon ion-ios-email-outline placeholder-icon"></i>
+		        	<input type="text" disabled="disabled" placeholder="adresse@mail.com" ng-model="profile.email">
+		      	</label>
+		    </div>
 
-</div>
+		    <!-- Divider Bar -->
+			<div class="item item-divider no-padding-top profil-divider">
+			    Paramètres
+			</div>
 
-  </ion-content>
+			<ion-toggle class="setting" ng-model="airplaneMode" toggle-class="toggle-calm">Notifications</ion-toggle>
+	    </div>
+	  </ion-content>
 </ion-view>
