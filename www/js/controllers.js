@@ -650,25 +650,6 @@ angular.module('starter.controllers', [])
         console.log(err);
       })
 
-      // $http.get(API.root + "surveys/result/" + $stateParams.surveyId).then(function (res) {
-      //   $scope.voteResult = res.data.data;
-
-      //   var labels = [];
-      //   var dataSet = [];
-      //   $scope.answersFromVotes = [];
-      //   for (var i = 0; i < $scope.voteResult.length; i++) {
-      //     $scope.answersFromVotes.push($scope.voteResult[i].answer.text);
-      //     $scope.labels.push($scope.voteResult[i].answer.text);
-      //     $scope.data.push($scope.voteResult[i].totalVotes);
-      //   }
-      //   console.log("Answers from Votes: ", $scope.answersFromVotes);
-      //   console.log('labels: ', labels);
-      //   console.log('dataSet: ', dataSet);
-      //   // $rootScope.$$phase || $rootScope.apply();
-      //   // console.log(JSON.stringify($scope.voteResult), $scope.voteResult);
-      // }, function (err) {
-      //   console.log(err);
-      // });
 
     }])
   ;
