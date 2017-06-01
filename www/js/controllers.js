@@ -73,15 +73,15 @@ angular.module('starter.controllers', [])
       $scope.username = name;
     };
   })
-  .controller('ProfileCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, API, $http,   $state, AuthService) {
+  .controller('ProfileCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, API, $http, $state, AuthService) {
 
     $scope.disableEdit = true;
 
-    $http.get(API.root + "userdetail/"+ AuthService.getUserId(),).then(
+    $http.get(API.root + "userdetail/" + AuthService.getUserId(), ).then(
       function (result) {
         $scope.profile = result.data.data;
 
-        console.log(result.data.message, $scope.polls);
+        console.log(result.data.message, $scope.profile);
       },
       function (response) {
         console.log(response);
@@ -91,10 +91,41 @@ angular.module('starter.controllers', [])
 
 
 
-      $scope.toggleEdit = function (){
-        $scope.disableEdit = !$scope.disableEdit;
-        console.log('$scope.disableEdit:',$scope.disableEdit)
-      }
+    $scope.toggleEdit = function () {
+      $scope.disableEdit = !$scope.disableEdit;
+      console.log('$scope.disableEdit:', $scope.disableEdit)
+    }
+
+    $scope.data = {
+      "name": "",
+      "email": "",
+      "phone": "",
+      "gender": "",
+      "address": "",
+      "county": "",
+      "constituency": "",
+      "ward": "",
+      "dob": "",
+      "password": ""
+    };
+    wardsData = [];
+    $scope.counties = [];
+    $scope.constituencies = [];
+    $scope.wards = [];
+    $http.get('js/wards.json').then(function (data) {
+      wardsData = data.data;
+      console.log("wards data:", wardsData);
+      $scope.counties = _(wardsData).map("County").uniq().value();
+      console.log(' $scope.counties', $scope.counties)
+    });
+    $scope.filterConstituency = function () {
+      $scope.constituencies = _(wardsData).filter({ County: $scope.profile.county }).map("Constituency").uniq().value();
+      console.log(' $scope.constituencies', $scope.constituencies)
+    }
+    $scope.filterWard = function () {
+      $scope.wards = _(wardsData).filter({ County: $scope.profile.county, Constituency: $scope.profile.constituency }).map("WardName").uniq().value();
+    }
+
 
     // Set Ink
     ionicMaterialInk.displayEffect();

@@ -37,7 +37,24 @@
       </div>
 
       <div class="list">
-
+        <label class="item item-input item-select item-clear">
+        <span class="input-label">County</span>
+          <select  ng-model="profile.county" ng-change="filterConstituency()" ng-disabled="disableEdit" >
+            <option ng-repeat="county in counties" value="{{county}}" >{{county}}</option>
+          </select>
+      </label>
+        <label class="item item-input item-select item-clear">
+        <span class="input-label">Constituency</span>
+          <select  ng-model="profile.constituency" ng-change="filterWard()" ng-disabled="disableEdit" >
+            <option ng-repeat="constituency in constituencies" value="{{constituency}}"  >{{constituency}}</option>
+          </select>
+      </label>
+        <label class="item item-input item-select item-clear">
+        <span class="input-label">Ward</span>
+          <select  ng-model="profile.ward" ng-disabled="disableEdit" >
+            <option ng-repeat="ward in wards" value="{{ward}}">{{ward}}</option>
+          </select>
+      </label>
       </div>
 
       <!-- Divider Bar -->
