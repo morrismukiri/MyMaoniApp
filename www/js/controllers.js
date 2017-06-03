@@ -137,15 +137,30 @@ angular.module('starter.controllers', [])
   // })
 
 
-  .controller('menuCtrl', ['$scope', '$stateParams', '$state', 'AuthService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+  .controller('menuCtrl', ['$scope', '$stateParams', '$state', 'AuthService','API', '$http',  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, $stateParams, $state, AuthService) {
+    function ($scope, $stateParams, $state, AuthService,API, $http) {
       //--------------------------------------------
       $scope.logout = function () {
         AuthService.logout();
         $state.go('app.login');
       };
+      $scope.user = {};
+
+
+      $http.get(API.root + "userdetail/" + AuthService.getUserId(), ).then(
+        function (user) {
+          $scope.user = user.data.data;
+          console.log("menu user detail",$scope.user)
+
+          console.log(user.data.message, $scope.profile);
+        },
+        function (response) {
+          console.log(response);
+        }
+      )
+
 
     }])
 
