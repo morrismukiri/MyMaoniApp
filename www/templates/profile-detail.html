@@ -33,7 +33,7 @@
 
       <!-- Divider Bar -->
       <div class="item item-divider no-padding-top profil-divider">
-        General
+        Address
       </div>
 
       <div class="list">
@@ -58,11 +58,17 @@
       </div>
 
       <!-- Divider Bar -->
-      <div class="item item-divider no-padding-top profil-divider">
+      <!--<div class="item item-divider no-padding-top profil-divider">
         Parameters
       </div>
 
-      <ion-toggle class="setting" ng-model="airplaneMode" toggle-class="toggle-calm">Notifications</ion-toggle>
+      <ion-toggle class="setting" ng-model="airplaneMode" toggle-class="toggle-calm">Notifications</ion-toggle>-->
+
     </div>
+    <div class=" card item-clear"  ng-hide="disableEdit">
+
+     <button class=" button button-block button-positive" ng-click="saveProfile()">Save</button>
+     </div>
+
   </ion-content>
 </ion-view>
