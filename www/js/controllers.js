@@ -73,9 +73,22 @@ angular.module('starter.controllers', [])
       $scope.username = name;
     };
   })
-  .controller('ProfileCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, API, $http, $state, AuthService) {
+  .controller('ProfileCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, API, $http, $state, AuthService, ionicToast) {
 
     $scope.disableEdit = true;
+
+    $scope.profile = {
+      "name": "",
+      "email": "",
+      "phone": "",
+      "gender": "",
+      "address": "",
+      "county": "",
+      "constituency": "",
+      "ward": "",
+      "dob": "",
+      "password": ""
+    };
 
     $http.get(API.root + "userdetail/" + AuthService.getUserId(), ).then(
       function (result) {
@@ -96,18 +109,7 @@ angular.module('starter.controllers', [])
       console.log('$scope.disableEdit:', $scope.disableEdit)
     }
 
-    $scope.data = {
-      "name": "",
-      "email": "",
-      "phone": "",
-      "gender": "",
-      "address": "",
-      "county": "",
-      "constituency": "",
-      "ward": "",
-      "dob": "",
-      "password": ""
-    };
+
     wardsData = [];
     $scope.counties = [];
     $scope.constituencies = [];
@@ -125,6 +127,20 @@ angular.module('starter.controllers', [])
     $scope.filterWard = function () {
       $scope.wards = _(wardsData).filter({ County: $scope.profile.county, Constituency: $scope.profile.constituency }).map("WardName").uniq().value();
     }
+    $scope.saveProfile = function(){
+       $http.put(API.root + "userdetail/" + AuthService.getUserId(), $scope.profile ).then(
+      function (result) {
+        // $scope.profile = result.data.data;
+        ionicToast.show('Your profile details have been saved!', 'bottom', false, 3000);
+        $scope.disableEdit = true;
+
+        console.log(result.data.message, $scope.profile,"\n result:",result.data.data);
+      },
+      function (response) {
+        console.log(response);
+      }
+    )
+    };
 
 
     // Set Ink
