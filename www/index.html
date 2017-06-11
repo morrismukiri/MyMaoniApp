@@ -58,10 +58,10 @@
         <ion-list id="menu-list1" data-componentid="list1">
           <ion-item class="item-thumbnail-left assertive" id="menu-list-item7" data-componentid="list-item7">
             <img src="img/person.png">
-            <h2assertive>My Maoni
+            <h2 class="assertive">My Maoni
               <p><a class="royal" ui-sref="tabsController.profile">{{user.name}}</a> </p>
               <p><a href="" ng-click="logout()" class="assertive">Log out</a></p>
-            </h2assertive>
+            </h2>
           </ion-item>
           <ion-item class="item-icon-left assertive" id="menu-list-item4" ui-sref="tabsController.home" menu-close="" data-componentid="list-item4">
             <i class="icon ion-home"></i>Home</ion-item>
@@ -70,10 +70,11 @@
           <ion-item class="item-icon-left assertive" id="menu-list-item6" ui-sref="tabsController.communityDiscussion" menu-close=""
             data-componentid="list-item6">
             <i class="icon ion-chatboxes"></i>My Contribution</ion-item>
-        </ion-list>
-        <ion-item class="item-icon-left assertive" id="menu-list-item7"  menu-close="" ui-sref="tabsController.profile" data-componentid="list-item7">
+
+              <ion-item class="item-icon-left assertive" id="menu-list-item7" menu-close="" ui-sref="tabsController.profile" data-componentid="list-item7">
           <i class="icon ion-person"></i>Profile</ion-item>
         </ion-list>
+
       </ion-content>
     </ion-side-menu>
   </ion-side-menus>
