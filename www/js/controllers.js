@@ -90,7 +90,7 @@ angular.module('starter.controllers', [])
       "password": ""
     };
 
-    $http.get(API.root + "userdetail/" + AuthService.getUserId(), ).then(
+    $http.get(API.root + "userdetail/" + AuthService.getUserId()).then(
       function (result) {
         $scope.profile = result.data.data;
 
@@ -165,7 +165,7 @@ angular.module('starter.controllers', [])
       $scope.user = {};
 
 
-      $http.get(API.root + "userdetail/" + AuthService.getUserId(), ).then(
+      $http.get(API.root + "userdetail/" + AuthService.getUserId()).then(
         function (user) {
           $scope.user = user.data.data;
           console.log("menu user detail",$scope.user)
