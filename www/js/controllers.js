@@ -19,7 +19,6 @@ angular.module('starter.controllers', [])
     $scope.login = function () {
       AuthService.login($scope.data.email, $scope.data.password).then(function (authenticated) {
         $state.go('tabsController.home', {}, { reload: true });
-        $scope.setCurrentUsername(data.username);
       }, function (err) {
         var alertPopup = $ionicPopup.alert({
           title: 'Login failed!',
@@ -49,7 +48,7 @@ angular.module('starter.controllers', [])
       }, 0);
     };
     //--------------------------------------------
-    $scope.username = AuthService.username();
+
 
     $scope.$on(AUTH_EVENTS.notAuthorized, function (event) {
       var alertPopup = $ionicPopup.alert({
@@ -69,9 +68,6 @@ angular.module('starter.controllers', [])
       });
     });
 
-    $scope.setCurrentUsername = function (name) {
-      $scope.username = name;
-    };
   })
   .controller('ProfileCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, API, $http, $state, AuthService, ionicToast) {
 
