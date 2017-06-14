@@ -10,6 +10,7 @@ angular.module('starter.services', [])
 
     function loadUserCredentials() {
       var token = window.localStorage.getItem(LOCAL_TOKEN_KEY);
+      console.log('Checking credentials. Token:',token);
       if (token) {
         useCredentials(token);
       }

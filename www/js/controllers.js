@@ -17,18 +17,26 @@ angular.module('starter.controllers', [])
     $scope.data = {};
     console.log("api", API);
     $scope.login = function () {
-      AuthService.login($scope.data.email, $scope.data.password).then(function (authenticated) {
-        $state.go('tabsController.home', {}, { reload: true });
-      }, function (err) {
+      if ($scope.data.email && $scope.data.password) {
+        AuthService.login($scope.data.email, $scope.data.password).then(function (authenticated) {
+          console.log('authenticated:',authenticated);
+          $state.go('tabsController.home', {}, { reload: true });
+        }, function (err) {
+          var alertPopup = $ionicPopup.alert({
+            title: 'Login failed!',
+            template: 'Please check your credentials!'
+          });
+          // to activate ink on modal
+          $timeout(function () {
+            ionicMaterialInk.displayEffect();
+          }, 0);
+        });
+      } else {
         var alertPopup = $ionicPopup.alert({
-          title: 'Login failed!',
+          title: 'Required!',
           template: 'Please check your credentials!'
         });
-        // to activate ink on modal
-        $timeout(function () {
-          ionicMaterialInk.displayEffect();
-        }, 0);
-      });
+      }
     };
     //--------------------------------------------
     $scope.logout = function () {
@@ -123,19 +131,19 @@ angular.module('starter.controllers', [])
     $scope.filterWard = function () {
       $scope.wards = _(wardsData).filter({ County: $scope.profile.county, Constituency: $scope.profile.constituency }).map("WardName").uniq().value();
     }
-    $scope.saveProfile = function(){
-       $http.put(API.root + "userdetail/" + AuthService.getUserId(), $scope.profile ).then(
-      function (result) {
-        // $scope.profile = result.data.data;
-        ionicToast.show('Your profile details have been saved!', 'bottom', false, 3000);
-        $scope.disableEdit = true;
+    $scope.saveProfile = function () {
+      $http.put(API.root + "userdetail/" + AuthService.getUserId(), $scope.profile).then(
+        function (result) {
+          // $scope.profile = result.data.data;
+          ionicToast.show('Your profile details have been saved!', 'bottom', false, 3000);
+          $scope.disableEdit = true;
 
-        console.log(result.data.message, $scope.profile,"\n result:",result.data.data);
-      },
-      function (response) {
-        console.log(response);
-      }
-    )
+          console.log(result.data.message, $scope.profile, "\n result:", result.data.data);
+        },
+        function (response) {
+          console.log(response);
+        }
+      )
     };
 
 
@@ -149,10 +157,10 @@ angular.module('starter.controllers', [])
   // })
 
 
-  .controller('menuCtrl', ['$scope', '$stateParams', '$state', 'AuthService','API', '$http',  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+  .controller('menuCtrl', ['$scope', '$stateParams', '$state', 'AuthService', 'API', '$http',  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, $stateParams, $state, AuthService,API, $http) {
+    function ($scope, $stateParams, $state, AuthService, API, $http) {
       //--------------------------------------------
       $scope.logout = function () {
         AuthService.logout();
@@ -160,18 +168,19 @@ angular.module('starter.controllers', [])
       };
       $scope.user = {};
 
+      if (AuthService.isAuthenticated()) {
+        $http.get(API.root + "userdetail/" + AuthService.getUserId()).then(
+          function (user) {
+            $scope.user = user.data.data;
+            console.log("menu user detail", $scope.user)
 
-      $http.get(API.root + "userdetail/" + AuthService.getUserId()).then(
-        function (user) {
-          $scope.user = user.data.data;
-          console.log("menu user detail",$scope.user)
-
-          console.log(user.data.message, $scope.profile);
-        },
-        function (response) {
-          console.log(response);
-        }
-      )
+            console.log(user.data.message, $scope.profile);
+          },
+          function (response) {
+            console.log(response);
+          }
+        )
+      }
 
 
     }])
