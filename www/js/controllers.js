@@ -19,7 +19,7 @@ angular.module('starter.controllers', [])
     $scope.login = function () {
       if ($scope.data.email && $scope.data.password) {
         AuthService.login($scope.data.email, $scope.data.password).then(function (authenticated) {
-          console.log('authenticated:',authenticated);
+          console.log('authenticated:', authenticated);
           $state.go('tabsController.home', {}, { reload: true });
         }, function (err) {
           var alertPopup = $ionicPopup.alert({
@@ -157,12 +157,11 @@ angular.module('starter.controllers', [])
   // })
 
 
-  .controller('menuCtrl', ['$scope', '$stateParams', '$state', 'AuthService', 'API', '$http',  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-    // You can include any angular dependencies as parameters for this function
-    // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function ($scope, $stateParams, $state, AuthService, API, $http) {
+  .controller('menuCtrl', ['$scope', '$stateParams', '$state', 'AuthService', 'API', '$http', '$ionicSideMenuDelegate',
+    function ($scope, $stateParams, $state, AuthService, API, $http, $ionicSideMenuDelegate) {
       //--------------------------------------------
       $scope.logout = function () {
+        $ionicSideMenuDelegate.toggleLeft();
         AuthService.logout();
         $state.go('app.login');
       };
