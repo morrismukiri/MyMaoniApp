@@ -47,14 +47,14 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services','
 .run(function ($rootScope, $state, AuthService, AUTH_EVENTS,$http) {
   $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
 
-    if ('data' in next && 'authorizedRoles' in next.data) {
-      var authorizedRoles = next.data.authorizedRoles;
-      if (!AuthService.isAuthorized(authorizedRoles)) {
-        event.preventDefault();
-        $state.go($state.current, {}, {reload: true});
-        $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-      }
-    }
+    // if ('data' in next && 'authorizedRoles' in next.data) {
+    //   var authorizedRoles = next.data.authorizedRoles;
+    //   if (!AuthService.isAuthorized(authorizedRoles)) {
+    //     event.preventDefault();
+    //     $state.go($state.current, {}, {reload: true});
+    //     $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+    //   }
+    // }
 
     if (!AuthService.isAuthenticated()) {
       var allowedStates = ['app.login', 'signup.basic', 'signup.verify_phone', 'signup.additional'];
