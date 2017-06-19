@@ -15,6 +15,7 @@ angular.module('starter.controllers', [])
 
     //--------------------------------------------
     $scope.data = {};
+    $scope.acceptsTerms=false;
     console.log("api", API);
     $scope.login = function () {
       if ($scope.data.email && $scope.data.password) {

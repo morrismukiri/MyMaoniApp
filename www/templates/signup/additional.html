@@ -35,9 +35,10 @@
           <span class="input-label">Password</span>
           <input type="password" placeholder="Password" ng-model="data.password">
         </label>
+        <ion-checkbox ng-model="acceptsTerms" class="item"> Agree to <a href="http://mymaoni.com">Terms and condition</a></ion-checkbox>
         </div>
 
-        <a class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="do_signup()">Finish</a>
+        <a class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="do_signup()" ng-disabled="!acceptsTerms">Finish</a>
       </div>
     </div>
 
