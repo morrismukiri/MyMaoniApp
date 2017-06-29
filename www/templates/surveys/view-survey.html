@@ -33,6 +33,30 @@
 
             <a class="item item-text-wrap" ng-repeat="poll in survey.polls" ui-sref="polls.viewPoll({pollId: poll.id})"> {{poll.title}} </a>
         </div>
+        <h4 class="border-top">Comments</h4>
+      <div class="list">
+
+        <a class="item item-avatar" ng-repeat="comment in survey.comments">
+          <img src="img/material1.jpg">
+          <h2>{{comment.user.name}}</h2>
+          <p>Posted <span am-time-ago="comment.created_at"></p>
+          <span class=" item-body">{{comment.comment}}</span>
+        </a>
+      </div>
+
+    </ion-list>
+  </ion-content>
+  <form id="footer-input" ng-submit="addComment(message)">
+    <ion-footer-bar keyboard-attach class="item-input-inset">
+      <label class="item-input-wrapper">
+
+            <input type="text" placeholder="Comment" ng-model="message">
+            </label>
+      <a class="button button-positive" ng-click="addComment(message)">
+        <i class="icon ion-android-send"></i>
+      </a>
+    </ion-footer-bar>
+  </form>
 
 
     </ion-list>
