@@ -1,38 +1,55 @@
 <ion-view title="Vote">
   <ion-content class="has-header">
-    <h3 class="padding">{{survey.title}}</h3>
-     <div class="item">
+    <div class="can-perticipate" ng-hide="canNotParticipate">
 
-          <h2>Posted by {{survey.user.name}}</h2>
-          <p class="subdued"> <span am-time-ago="survey.created_at"></span></p>
+      <h2 class="item item-devider">
+        Sorry, You cannot particpate at this time.
+      </h2>
+      <div ng-hide="!beforeOpen" class="item item-text-wrap">
+        <h3>Survey is not open yet. </h3>
+        <p>It opens at opens at {{survey.openTime}} </p>
+      </div>
+      <div ng-hide="!afterClose" class="item item-text-wrap">
+        <h3>Survey participation is closed</h3>
+        <p>This survey closed on {{survey.closeTime}} </p>
+      </div>
+      <a class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="goBack()">Back</a>
+    </div>
+    <div class="can-perticipate" ng-hide="!canNotParticipate">
+      <h3 class="padding">{{survey.title}}</h3>
+      <div class="item">
 
-        </div>
-    <ion-list>
-      <div class="list card" ng-repeat="poll in survey.polls">
-        <!--<div class="item">-->
-        <h1 class="item item-divider item-text-wrap">{{poll.title}}</h1>
+        <h2>Posted by {{survey.user.name}}</h2>
+        <p class="subdued"> <span am-time-ago="survey.created_at"></span></p>
 
-        <div class="item">
-          <div class="item-body ">
+      </div>
+      <ion-list>
+        <div class="list card" ng-repeat="poll in survey.polls">
+          <!--<div class="item">-->
+          <h1 class="item item-divider ">{{poll.title}}</h1>
 
-            <div class="list ">
-              <!--<div class="item item-divider">Your selectiion</div>-->
-              <label class="item item-radio" ng-repeat="answer in poll.answers">
+          <div class="item">
+            <div class="item-body ">
+
+              <div class="list ">
+                <!--<div class="item item-divider">Your selectiion</div>-->
+                <label class="item item-radio" ng-repeat="answer in poll.answers">
                 <input type="radio" ng-model="data.selection[poll.id]" value="{{answer.id}}">
                 <i class="radio-icon ion-checkmark"></i>
                 <div class="item-content">{{answer.text}}</div>
               </label>
-              <label class="item  item-input item-floating-label">
+                <label class="item  item-input item-floating-label">
                 <span class="input-label">Why?</span>
                 <input type="text" ng-model="data.comment[poll.id]" name="data.comment[]" placeholder="Why?">
               </label>
 
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!--</div>-->
-    </ion-list>
-    <a class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="submitVote()">Submit</a>
+        <!--</div>-->
+      </ion-list>
+      <a class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="submitVote()">Submit</a>
+    </div>
   </ion-content>
 </ion-view>

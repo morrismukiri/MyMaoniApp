@@ -15,7 +15,7 @@ angular.module('starter.controllers', [])
 
     //--------------------------------------------
     $scope.data = {};
-    $scope.acceptsTerms=false;
+    $scope.acceptsTerms = false;
     console.log("api", API);
     $scope.login = function () {
       if ($scope.data.email && $scope.data.password) {
@@ -584,18 +584,35 @@ angular.module('starter.controllers', [])
       };
 
     }])
-  .controller('surveyVoteCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate', '$ionicPopup', 'ionicToast',
-    function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, $rootScope, $ionicScrollDelegate, $ionicPopup, ionicToast) {
+  .controller('surveyVoteCtrl', ['$scope', '$state', '$stateParams', 'API', '$http', 'AuthService', 'moment', 'ionicDatePicker', '$rootScope', '$ionicScrollDelegate', '$ionicPopup', 'ionicToast', '$ionicHistory',
+    function ($scope, $state, $stateParams, API, $http, AuthService, moment, ionicDatePicker, $rootScope, $ionicScrollDelegate, $ionicPopup, ionicToast, $ionicHistory) {
       $scope.poll = {};
       $scope.data = {};
       $scope.selection = null;
+
+      $scope.canNotParticipate = true;
+      $scope.surveyIsOpen = false;
+      $scope.beforeOpen = true;
+      $scope.afterClose = true;
+
       $http.get(API.root + "surveys/" + $stateParams.surveyId).then(function (res) {
         $scope.survey = res.data.data;
         $rootScope.$$phase || $rootScope.apply();
-        console.log($scope.survey);
+
+        $scope.beforeOpen = moment().isBefore($scope.survey.openTime);
+        $scope.afterClose = moment().isAfter($scope.survey.closeTime);
+        $scope.surveyIsOpen = !$scope.beforeOpen && !$scope.aftereClose;
+        console.log('Survey Opens at ', $scope.survey.openTime, ' closes at  ', $scope.survey.closeTime, ' isOpen=', $scope.surveyIsOpen);
+        console.log('Before:', $scope.beforeOpen, ' After:', $scope.survey.closeTime, $scope.afterClose);
+        $scope.canNotParticipate = $scope.surveyIsOpen;
+
+        // console.log($scope.survey);
       }, function (err) {
         console.log(err);
       });
+      $scope.goBack = function () {
+        $ionicHistory.goBack();
+      };
       $scope.hideToast = function () {
         ionicToast.hide();
       };
