@@ -42,5 +42,6 @@
     <icon src="resources\android\icon\drawable-xhdpi-icon.png" />
     <allow-navigation href="http://40.10.10.120:8100" />
     <allow-navigation href="http://*/*" />
+    <engine name="ios" spec="^4.4.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="~1.7.0" />
 </widget>
