@@ -172,7 +172,7 @@ angular.module('starter.controllers', [])
         $state.go('app.login');
       };
       $scope.user = {};
-
+      $scope.devicePlatform = ionic.Platform;
       if (AuthService.isAuthenticated()) {
         $http.get(API.root + "userdetail/" + AuthService.getUserId()).then(
           function (user) {
@@ -522,7 +522,7 @@ angular.module('starter.controllers', [])
     }])
   .controller('surveyCtrl', ['$scope', '$stateParams', 'API', '$http', 'AuthService',
     function ($scope, $stateParams, API, $http, AuthService) {
-
+      $scope.devicePlatform = ionic.Platform;
       $http.get(API.root + "surveys").then(
         function (result) {
           $scope.surveys = result.data.data;

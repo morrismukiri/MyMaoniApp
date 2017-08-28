@@ -64,15 +64,24 @@
             </h2>
           </ion-item>
           <ion-item class="item-icon-left assertive" id="menu-list-item4" ui-sref="tabsController.home" menu-close="" data-componentid="list-item4">
-            <i class="icon ion-home"></i>Home</ion-item>
+            <i ng-class="{
+              'icon ion-android-home': devicePlatform === 'Android',
+              'icon ion-ios-home': devicePlatform !== 'Android'
+          }"></i>Home</ion-item>
           <!--<ion-item class="item-icon-left assertive" id="menu-list-item5" ui-sref="tabsController.polls" menu-close="" data-componentid="list-item5">
             <i class="icon ion-clipboard"></i>My Polls</ion-item>-->
           <ion-item class="item-icon-left assertive" id="menu-list-item6" ui-sref="tabsController.communityDiscussion" menu-close=""
             data-componentid="list-item6">
-            <i class="icon ion-chatboxes"></i>My Contribution</ion-item>
+            <i ng-class="{
+              'icon ion-android-chatboxes': devicePlatform === 'Android',
+              'icon ion-ios-chatboxes': devicePlatform !== 'Android'
+          }"></i>My Contribution</ion-item>
 
               <ion-item class="item-icon-left assertive" id="menu-list-item7" menu-close="" ui-sref="tabsController.profile" data-componentid="list-item7">
-          <i class="icon ion-person"></i>Profile</ion-item>
+          <i ng-class="{
+            'icon ion-android-person': devicePlatform === 'Android',
+            'icon ion-ios-person': devicePlatform !== 'Android'
+        }"></i>Profile</ion-item>
         </ion-list>
 
       </ion-content>

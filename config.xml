@@ -74,6 +74,7 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
     </platform>
     <preference name="SplashShowOnlyFirstTime" value="false" />
+    <allow-navigation href="http://40.10.10.107:8100" />
     <engine name="ios" spec="^4.4.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="~1.7.0" />
 </widget>
