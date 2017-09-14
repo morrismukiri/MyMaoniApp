@@ -3,13 +3,13 @@
     "version": "1.0.0",
     "description": "ost-login-kit-v1.0: An Ionic project",
     "dependencies": {
+        "cordova-plugin-inappbrowser": "~1.7.0",
         "gulp": "^3.5.6",
         "gulp-concat": "^2.2.0",
         "gulp-minify-css": "^0.3.0",
         "gulp-rename": "^1.2.0",
         "gulp-sass": "^1.3.3",
-        "node-sass": "^4.5.2",
-        "cordova-plugin-inappbrowser": "~1.7.0"
+        "node-sass": "^4.5.2"
     },
     "devDependencies": {
         "bower": "^1.3.3",
