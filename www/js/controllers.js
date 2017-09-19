@@ -462,6 +462,10 @@ angular.module('starter.controllers', [])
         console.log(err);
       })
     };
+    $scope.validateBasic =function(){
+
+    }
+
     $scope.do_signup = function () {
       console.log('Signup data :', JSON.stringify($scope.data))
       AuthService.signup($scope.data).then(function (res) {
