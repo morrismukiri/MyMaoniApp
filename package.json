@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "ost-login-kit-v1.0: An Ionic project",
     "dependencies": {
+        "cordova-ios": "^4.4.0",
         "cordova-plugin-inappbrowser": "~1.7.0",
         "gulp": "^3.5.6",
         "gulp-concat": "^2.2.0",
@@ -24,10 +25,15 @@
         "cordova-plugin-splashscreen",
         "com.ionic.keyboard"
     ],
-    "cordovaPlatforms": [],
+    "cordovaPlatforms": [
+        "ios"
+    ],
     "cordova": {
         "plugins": {
             "cordova-plugin-inappbrowser": {}
-        }
+        },
+        "platforms": [
+            "ios"
+        ]
     }
 }
