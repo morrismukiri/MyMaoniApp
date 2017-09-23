@@ -4,11 +4,12 @@
     <div class="row responsive-sm ">
       <div class="col">
         <div class="app-logo"><img src="img/logo.png"></div>
-
+        <form name="signupBasic">
         <div class="list list-inset removePM">
           <label class="item item-input  item-floating-label">
           <span class="input-label">Full Name</span>
-          <input type="text" placeholder="Full Name" ng-model="data.name">
+          <span ng-show="signupBasic.name.$error.required" class="assertive">Please enter your name</span>
+          <input type="text" placeholder="Full Name" name="name" ng-model="data.name" required>
         </label>
           <!--<label class="item item-input  item-floating-label">
           <span class="input-label">Email Address</span>
@@ -16,7 +17,8 @@
         </label>-->
           <label class="item item-input  item-floating-label">
           <span class="input-label">Phone Number</span>
-          <input type="tel" placeholder="Phone Number" ng-pattern="/(0|\+?254)7([0-3|7])(\d){7}/i" ng-model="data.phone">
+          <input type="tel" name="phone" placeholder="Phone Number" ng-pattern="/(0|\+?254)7([0-3|7])(\d){7}/i" ng-model="data.phone">
+          <span ng-show="signupBasic.phone.$error.required">Please enter your phone number</span>
         </label>
           <label class="item item-input item-select item-clear">
         <span class="input-label">County</span>
@@ -43,7 +45,9 @@
         </label>-->
         </div>
 
-        <a class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ui-sref="signup.additional" ng-click="validateBasic()">Next</a>
+
+        <input type="submit" class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="validateBasic()" value="Next"/>
+      </form>
       </div>
     </div>
 

@@ -463,7 +463,15 @@ angular.module('starter.controllers', [])
       })
     };
     $scope.validateBasic =function(){
+     if(!$scope.data.name || !$scope.data.phone || !$scope.data.county || !$scope.data.constituency || !$scope.data.ward){
+      var alertPopup = $ionicPopup.alert({
+        title: 'You missed something!',
+        template: 'Please check your details!'
+      });
 
+     }else{
+      $state.go('signup.verify_phone', {}, { reload: true });
+     }
     }
 
     $scope.do_signup = function () {
