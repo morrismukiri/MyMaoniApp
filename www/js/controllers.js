@@ -437,14 +437,19 @@ angular.module('starter.controllers', [])
     $scope.filterWard = function () {
       $scope.wards = _(wardsData).filter({ County: $scope.data.county, Constituency: $scope.data.constituency }).map("WardName").uniq().value();
     }
+    $scope.verificationCode ="";
+    $scope.showVerification= false;
+    $scope.sendText = "Yes, send to this number";
+    $scope.sendIcon = "ion-thumbsup";
+    $scope.send_verification = function () {
 
-    $scope.send_verification = function (phone) {
-      var data = {
-        "phone": phone
-      };
-      //TODO show dialog
-      $http.post(API.root + "send_verification", data).then(function (res) {
-        console.log(res.data.data);
+     //TODO show dialog
+      $http.get(API.root + "verify_phone/"+$scope.data.phone).then(function (res) {
+        $scope.verificationCode = res.data.code;
+        $scope.showVerification= true;
+        $scope.sendText = "Resend the code";
+        $scope.sendIcon = "ion-refresh";
+        console.log(res.data);
       }, function (err) {
         console.log(err);
       })
@@ -456,11 +461,21 @@ angular.module('starter.controllers', [])
         "code": $scope.data.verificationCode
       };
       //TODO show dialog
-      $http.post(API.root + "check_verification", data).then(function (res) {
-        console.log(res.data.data);
-      }, function (err) {
-        console.log(err);
-      })
+      // $http.post(API.root + "check_verification", data).then(function (res) {
+      //   console.log(res.data.data);
+      // }, function (err) {
+      //   console.log(err);
+      // })
+      console.log('$scope.data.verificationCode %s $scope.verificationCode %s',$scope.data.verificationCode, $scope.verificationCode)
+      if($scope.data.verificationCode === $scope.verificationCode){
+        console.log('verification ok');
+        $state.go('signup.additional', {}, { reload: true });
+      }else{
+        var alertPopup = $ionicPopup.alert({
+          title: 'Wrong code!',
+          template: 'Please check you entered the right verication'
+        });
+      }
     };
     $scope.validateBasic =function(){
      if(!$scope.data.name || !$scope.data.phone || !$scope.data.county || !$scope.data.constituency || !$scope.data.ward){

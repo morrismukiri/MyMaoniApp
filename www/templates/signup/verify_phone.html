@@ -17,12 +17,12 @@
             <p>Is this okay?</p>
           </div>
           <div class="item tabs tabs-stable tabs-icon-left  removePM">
-            <a class="tab-item balanced" data-ink-color="#336699" data-ink-opacity="0.5"><i class="icon ion-thumbsup"></i> Yes, send to this number </a>
+            <a class="tab-item balanced" data-ink-color="#336699" data-ink-opacity="0.5" ng-click="send_verification()"><i class="icon {{sendIcon}}"></i> {{sendText}} </a>
             <a class="tab-item assertive" data-ink-color="#336699" data-ink-opacity="0.5" ui-sref="signup.basic"> <i class="icon ion-edit"></i> No, let me change </a>
             <!--<a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"> <i class="icon ion-share"></i> Share </a>-->
           </div>
         </div>
-        <div class="list list-inset removePM">
+        <div class="list list-inset removePM" ng-show="showVerification">
 
           <label class="item item-input ">
           <span class="input-label">Confirmation Code</span>
@@ -30,9 +30,9 @@
         </label>
         </div>
 
-        <a class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ui-sref="signup.verify_phone">Verify</a>
+        <a class="button button-block button-calm ink" data-ink-color="#9DEAFF" ng-click="check_verification()" data-ink-opacity="1" >Verify</a>
 
-        <a class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ui-sref="signup.additional">skip</a>
+        <!-- <a class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ui-sref="signup.additional">skip</a> -->
       </div>
     </div>
 

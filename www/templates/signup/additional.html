@@ -14,8 +14,8 @@
           <span class="input-label">Date of Birth</span>
           <input type="text" ng-model="data.dob" placeholder="Date of Birth"  ng-click="dobDatePicker()">
         </label>
-          <div class="card list ">
             <div class="item item-divider">Gender</div>
+            <div class="item">
             <label class="item item-radio">
       <input type="radio" ng-model="data.gender" value="male">
       <div class="item-content">
@@ -30,12 +30,14 @@
       </div>
       <i class="radio-icon ion-checkmark"></i>
     </label>
-          </div>
+    </div>
           <label class="item item-input  item-floating-label">
           <span class="input-label">Password</span>
           <input type="password" placeholder="Password" ng-model="data.password">
         </label>
+        <label class="item item-input  item-floating-label">
         <ion-checkbox ng-model="acceptsTerms" class="item"> Agree to <a href="http://mymaoni.com">Terms and condition</a></ion-checkbox>
+      </label>
         </div>
 
         <a class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="do_signup()" ng-disabled="!acceptsTerms">Finish</a>
