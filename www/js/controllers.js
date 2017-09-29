@@ -21,12 +21,12 @@ angular.module('starter.controllers', [])
       if ($scope.data.email && $scope.data.password) {
         AuthService.login($scope.data.email, $scope.data.password).then(function (authenticated) {
           console.log('authenticated:', authenticated);
-          // $state.go('tabsController.home', {}, { reload: true });
-          $state.transitionTo('tabsController.home', $stateParams, {
-            reload: true,
-            inherit: false,
-            notify: true
-          });
+          $state.go('tabsController.home', {}, { reload: true });
+          // $state.transitionTo('tabsController.home', $stateParams, {
+          //   reload: true,
+          //   inherit: false,
+          //   notify: true
+          // });
         }, function (err) {
           var alertPopup = $ionicPopup.alert({
             title: 'Login failed!',
