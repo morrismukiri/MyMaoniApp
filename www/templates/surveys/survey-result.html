@@ -7,7 +7,9 @@
 
     <ion-list class="list">
       <div class="item item-devider card list" ng-repeat="poll in survey.polls">
-          <h3 class="item ">{{poll.title}}</h3>
+        <div class="item item-divider item-text-wrap">
+          <h2 class="">{{poll.title}}</h2>
+          </div>
           <div class="item item-text-wrap">
             <canvas class="chart chart-pie" chart-data="poll.data" chart-labels="poll.labels" chart-legend="true" chart-options="options"
               chart-colors="colors">
