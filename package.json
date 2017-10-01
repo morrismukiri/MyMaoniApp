@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "ost-login-kit-v1.0: An Ionic project",
     "dependencies": {
+        "cordova-android": "^6.3.0",
         "cordova-ios": "^4.4.0",
         "cordova-plugin-inappbrowser": "~1.7.0",
         "gulp": "^3.5.6",
